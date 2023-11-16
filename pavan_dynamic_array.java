@@ -1,4 +1,6 @@
-public class pavan_dynamic_array {
+import java.io.Serializable;
+
+public class pavan_dynamic_array implements Serializable{
     private Object[] array;
     private int size;
 

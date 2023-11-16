@@ -1,4 +1,6 @@
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable {
     private static int temp = 100;
     private String name;
     private String rollNo;
@@ -28,6 +30,10 @@ public class Teacher {
         return sections;
     }
 
+    public void assignToSection(Section section){
+        sections.add(section);
+        section.addTeacher(this);
+    }
     public void assignToCourse(Course course) {
         courses.add(course);
         course.addTeacher(this);
@@ -38,16 +44,13 @@ public class Teacher {
         temp++;
         return rollNumber;
     }
-    public void setSection(String section) {
-        sections.add(section);
-    }
     public void displayTeacherInfo() {
         System.out.println("Teacher Name: " + name);
         System.out.println("Roll Number: " + rollNo);
         System.out.println("Sections Taught: ");
         for (int i = 0; i < sections.size(); i++) {
-            String section = (String) sections.get(i);
-            System.out.println("- " + section);
+            Section section = (Section) sections.get(i);
+            System.out.println(section.getName());
         }
     }
 }

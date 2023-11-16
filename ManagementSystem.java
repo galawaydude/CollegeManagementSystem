@@ -1,12 +1,49 @@
-public class ManagementSystem {
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class ManagementSystem implements Serializable {
     private pavan_dynamic_array students;
     private pavan_dynamic_array teachers;
     private pavan_dynamic_array courses;
+    private pavan_dynamic_array sections;
 
     public ManagementSystem() {
         students = new pavan_dynamic_array(1);
         teachers = new pavan_dynamic_array(1);
         courses = new pavan_dynamic_array(1);
+        sections = new pavan_dynamic_array(1);
+    }
+
+
+
+    
+    public void saveData() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.ser"))) {
+            out.writeObject(students);
+            out.writeObject(teachers);
+            out.writeObject(courses);
+            out.writeObject(sections);
+            System.out.println("Data saved successfully!");
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+    public void loadData() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.ser"))) {
+            students = (pavan_dynamic_array) in.readObject();
+            teachers = (pavan_dynamic_array) in.readObject();
+            courses = (pavan_dynamic_array) in.readObject();
+            sections = (pavan_dynamic_array) in.readObject();
+            System.out.println("Data loaded successfully!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading data: " + e.getMessage());
+        }
     }
 
     public void addStudent(Student student) {
@@ -21,6 +58,10 @@ public class ManagementSystem {
         courses.add(course);
     }
 
+    public void addSection(Section section){
+        sections.add(section);
+    }
+
     public pavan_dynamic_array getStudents() {
         return students;
     }
@@ -31,6 +72,10 @@ public class ManagementSystem {
 
     public pavan_dynamic_array getCourses() {
         return courses;
+    }
+
+    public pavan_dynamic_array getSections(){
+        return sections;
     }
     public pavan_dynamic_array getTeachersOfSection(String section) {
         pavan_dynamic_array teachersOfStudent = new pavan_dynamic_array(1);

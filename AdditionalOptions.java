@@ -24,7 +24,8 @@ public class AdditionalOptions {
                     case 1:
                         System.out.print("Enter the teacher's roll number: ");
                         String teacherRollNo = scanner.nextLine();
-                        pavan_dynamic_array coursesTaughtByTeacher = collegeSystem.getCoursesTaughtByTeacher(teacherRollNo);
+                        pavan_dynamic_array coursesTaughtByTeacher = collegeSystem
+                                .getCoursesTaughtByTeacher(teacherRollNo);
                         if (coursesTaughtByTeacher.size() == 0) {
                             System.out.println("No courses found for the given teacher.");
                         } else {
@@ -36,7 +37,6 @@ public class AdditionalOptions {
                             }
                         }
                         break;
-
 
                     case 2:
                         System.out.print("Enter the course name: ");
@@ -57,12 +57,13 @@ public class AdditionalOptions {
 
                     case 3:
                         System.out.println("Returning to Main Menu.");
-                        try{
+                        try {
                             return;
-                        }catch(Exception e){
+                        } catch (Exception e) {
 
-                        }finally{
-                            System.out.println("To solve this exception, i would need to create another class to manage both the menu's, will implement that for endsem along with other features");
+                        } finally {
+                            System.out.println(
+                                    "To solve this exception, i would need to create another class to manage both the menu's, will implement that for endsem along with other features");
                         }
 
                     default:

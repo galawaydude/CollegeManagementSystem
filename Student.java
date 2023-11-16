@@ -1,13 +1,14 @@
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private static int  temp = 100;
     private String name;
     private String rollNo;
     private String section;
     private pavan_dynamic_array enrolledCourses;
 
-    public Student(String name, String section) {
+    public Student(String name) {
         this.name = name;
-        this.section = section;
         this.rollNo = generateStudentRollNumber();
         enrolledCourses = new pavan_dynamic_array(2);
     }
@@ -29,6 +30,10 @@ public class Student {
         return enrolledCourses;
     }
 
+    public void enrollInSection(Section section){
+        this.section = section.getName();
+        section.addStudent(this);
+    }
     public void enrollInCourse(Course course) {
         enrolledCourses.add(course);
         course.addStudent(this);
