@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Student implements Serializable {
+public class Student {
     private static int  temp = 100;
     private String name;
     private String rollNo;

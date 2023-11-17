@@ -1,0 +1,9 @@
+Courses: 
+Name: Math
+Teachers Teaching: 
+Students Enrolled: 
+
+Name: Physics
+Teachers Teaching: 
+Students Enrolled: Pavan, 
+

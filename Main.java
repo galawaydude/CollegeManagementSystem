@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ManagementSystem collegeSystem = new ManagementSystem();
-        collegeSystem.loadData();
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
@@ -24,7 +23,6 @@ public class Main {
             System.out.println("13 Display Sections");
             System.out.println("14. Exit");
             System.out.print("Enter your choice: ");
-            collegeSystem.saveData();
             int choice = scanner.nextInt();
             scanner.nextLine();
 
@@ -298,6 +296,10 @@ public class Main {
                 case 14:
                     System.out.println("Exiting College Management System.");
                     scanner.close();
+                    collegeSystem.saveStateToFile("Students.txt", Student.class);
+                    collegeSystem.saveStateToFile("Teachers.txt", Teacher.class);
+                    collegeSystem.saveStateToFile("Sections.txt", Section.class);
+                    collegeSystem.saveStateToFile("Courses.txt", Course.class);
                     exit = true;
 
                     break;

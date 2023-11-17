@@ -1,6 +1,4 @@
-import java.io.Serializable;
-
-public class Teacher implements Serializable {
+public class Teacher{
     private static int temp = 100;
     private String name;
     private String rollNo;

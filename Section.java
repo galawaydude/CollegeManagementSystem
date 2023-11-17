@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Section implements Serializable {
+public class Section{
     private String name;
     private pavan_dynamic_array teachers;
     private pavan_dynamic_array students;
