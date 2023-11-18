@@ -4,18 +4,93 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
 
-public class ManagementSystem {
+enum UserRole {
+    CREATOR,
+    ADMIN,
+    TEACHER,
+    STUDENT
+}
+
+public class ManagementSystem implements Serializable {
     private pavan_dynamic_array students;
     private pavan_dynamic_array teachers;
     private pavan_dynamic_array courses;
     private pavan_dynamic_array sections;
+    private pavan_dynamic_array admins;
 
     public ManagementSystem() {
         students = new pavan_dynamic_array(1);
         teachers = new pavan_dynamic_array(1);
         courses = new pavan_dynamic_array(1);
         sections = new pavan_dynamic_array(1);
+        admins = new pavan_dynamic_array(1);
+    }
+
+    public Object authenticateUser(UserRole role, String username, String password) {
+        switch (role) {
+            case CREATOR:
+                if (username.equals("Pavan") && password.equals("%Fortress123&")) {
+                    return "Creator";
+                }
+                break;
+
+            case ADMIN:
+                Admin authenticatedAdmin = authenticateAdmin(username, password);
+                if (authenticatedAdmin != null) {
+                    return authenticatedAdmin;
+                }
+                break;
+            case TEACHER:
+                Teacher authenticatedTeacher = authenticateTeacher(username, password);
+                if (authenticatedTeacher != null) {
+                    return authenticatedTeacher;
+                }
+                break;
+
+            case STUDENT:
+                Student authenticatedStudent = authenticateStudent(username, password);
+                if (authenticatedStudent != null) {
+                    return authenticatedStudent;
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return null;
+    }
+
+    public void saveData() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.ser"))) {
+            out.writeObject(students);
+            out.writeObject(teachers);
+            out.writeObject(courses);
+            out.writeObject(sections);
+            out.writeObject(admins);
+            System.out.println("Data saved successfully!");
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+    public void loadData() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.ser"))) {
+            students = (pavan_dynamic_array) in.readObject();
+            teachers = (pavan_dynamic_array) in.readObject();
+            courses = (pavan_dynamic_array) in.readObject();
+            sections = (pavan_dynamic_array) in.readObject();
+            admins = (pavan_dynamic_array) in.readObject();
+            System.out.println("Data loaded successfully!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading data: " + e.getMessage());
+        }
     }
 
     public void saveStateToFile(String filename, Class<?> clazz) {
@@ -139,6 +214,36 @@ public class ManagementSystem {
         }
     }
 
+    public Student authenticateStudent(String username, String password) {
+        for (int i = 0; i < students.size(); i++) {
+            Student student = (Student) students.get(i);
+            if (student.getName().equals(username) && student.getPassword().equals(password)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public Teacher authenticateTeacher(String username, String password) {
+        for (int i = 0; i < teachers.size(); i++) {
+            Teacher teacher = (Teacher) teachers.get(i);
+            if (teacher.getName().equals(username) && teacher.getPassword().equals(password)) {
+                return teacher;
+            }
+        }
+        return null;
+    }
+
+    public Admin authenticateAdmin(String username, String password) {
+        for (int i = 0; i < admins.size(); i++) {
+            Admin admin = (Admin) admins.get(i);
+            if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+                return admin;
+            }
+        }
+        return null; 
+    }
+
     public void addStudent(Student student) {
         students.add(student);
     }
@@ -153,6 +258,14 @@ public class ManagementSystem {
 
     public void addSection(Section section) {
         sections.add(section);
+    }
+
+    public void addAdmin(Admin admin){
+        admins.add(admin);
+    }
+
+    public pavan_dynamic_array getAdmin(){
+        return admins;
     }
 
     public pavan_dynamic_array getStudents() {

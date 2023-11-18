@@ -1,13 +1,19 @@
-public class Teacher{
+import java.io.Serializable;
+
+public class Teacher implements Serializable{
     private static int temp = 100;
     private String name;
     private String rollNo;
+    private String EmailAddress;
+    public  String Password;
     private pavan_dynamic_array courses;
     private pavan_dynamic_array sections;
 
     public Teacher(String name) {
         this.name = name;
         this.rollNo = generateTeacherRollNumber();
+        this.EmailAddress = generateEmailId();
+        this.Password = "Password";  
         courses = new pavan_dynamic_array(2);
         sections = new pavan_dynamic_array(2);
     }
@@ -23,11 +29,17 @@ public class Teacher{
     public pavan_dynamic_array getCourses() {
         return courses;
     }
+    public String getPassword(){
+        return Password;
+    }
 
     public pavan_dynamic_array getSections() {
         return sections;
     }
 
+    public void setPassword(String newPassword){
+        this.Password = newPassword;
+    }
     public void assignToSection(Section section){
         sections.add(section);
         section.addTeacher(this);
@@ -41,6 +53,11 @@ public class Teacher{
         String rollNumber =  "BML" + 2022 + "tch" + temp;
         temp++;
         return rollNumber;
+    }
+
+    private String generateEmailId(){
+        String emailid = this.name + "@bmu.edu.in";
+        return emailid;
     }
     public void displayTeacherInfo() {
         System.out.println("Teacher Name: " + name);

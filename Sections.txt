@@ -1,5 +1,0 @@
-Sections:
-Name: CSE12
-Teachers Teaching: 
-Students in Section: Pavan, 
-

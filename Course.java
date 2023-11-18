@@ -1,4 +1,6 @@
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String name;
     private pavan_dynamic_array teachers;
     private pavan_dynamic_array students;

@@ -1,31 +1,165 @@
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static private boolean CreatorLogged = false;
+    static private boolean AdminLogged = false;
+    static ManagementSystem collegeSystem = new ManagementSystem();
+
     public static void main(String[] args) {
-        ManagementSystem collegeSystem = new ManagementSystem();
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
+        collegeSystem.loadData();
 
         while (true) {
-            System.out.println("College Management System Menu:");
-            System.out.println("1. Add Student");
-            System.out.println("2. Add Teacher");
-            System.out.println("3. Add Course");
-            System.out.println("4. add Section");
-            System.out.println("5. Enroll Student in Course");
-            System.out.println("6. Assign Teacher to Course");
-            System.out.println("7. Assign Teacher to Section");
-            System.out.println("8. Assign Student to Section");
-            System.out.println("9. Additional Options");
-            System.out.println("10. Display Students");
-            System.out.println("11. Display Teachers");
-            System.out.println("12. Display Courses");
-            System.out.println("13 Display Sections");
-            System.out.println("14. Exit");
-            System.out.print("Enter your choice: ");
+            LoginMenu();
+            System.out.println("Enter your choice");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
+            switch (choice) {
+                case 1:
+                    authenticateAndDisplayMenu(UserRole.CREATOR);
+                    break;
+
+                case 2:
+                    authenticateAndDisplayMenu(UserRole.ADMIN);
+                    break;
+
+                case 3:
+                    authenticateAndDisplayMenu(UserRole.TEACHER);
+                    break;
+
+                case 4:
+                    authenticateAndDisplayMenu(UserRole.STUDENT);
+                    break;
+
+                case 5:
+                    System.out.println("Exiting the system. Goodbye!");
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    private static void authenticateAndDisplayMenu(UserRole role) {
+        System.out.println("Enter your username: ");
+        String username = scanner.nextLine();
+        System.out.println("Enter your password: ");
+        String password = scanner.nextLine();
+
+        switch (role) {
+            case CREATOR:
+                if (username.equals("Pavan") && password.equals("%Fortress123&")) {
+                    System.out.println("Creator authentication successful.");
+                    PavanControls();
+                } else {
+                    System.out.println("Creator authentication failed. Invalid username or password.");
+                }
+                break;
+
+            case ADMIN:
+                Admin authenticatedAdmin = collegeSystem.authenticateAdmin(username, password);
+                if (authenticatedAdmin != null) {
+                    System.out.println("Admin authentication successful.");
+                    AdminControls();
+                } else {
+                    System.out.println("Admin authentication failed. Invalid username or password.");
+                }
+                break;
+
+            case TEACHER:
+                Teacher authenticatedTeacher = collegeSystem.authenticateTeacher(username, password);
+                if (authenticatedTeacher != null) {
+                    System.out.println("Teacher authentication successful.");
+                    TeacherControls(authenticatedTeacher);
+                } else {
+                    System.out.println("Teacher authentication failed. Invalid username or password.");
+                }
+                break;
+
+            case STUDENT:
+                Student authenticatedStudent = collegeSystem.authenticateStudent(username, password);
+                if (authenticatedStudent != null) {
+                    System.out.println("Student authentication successful.");
+                    StudentControls(authenticatedStudent);
+                } else {
+                    System.out.println("Student authentication failed. Invalid username or password.");
+                }
+                break;
+        }
+    }
+
+    private static void LoginMenu() {
+        System.out.println("LOGIN PAGE \n");
+        System.out.println("LOGIN AS: :");
+        System.out.println("1. Pavan ");
+        System.out.println("2. Admin");
+        System.out.println("3. Teacher");
+        System.out.println("4. Student");
+        System.out.println("5. Exit");
+    }
+
+    private static void PavanMenu() {
+        System.out.println("0. Add Admin");
+        System.out.println("1. Add Student");
+        System.out.println("2. Add Teacher");
+        System.out.println("3. Add Course");
+        System.out.println("4. add Section");
+        System.out.println("5. Enroll Student in Course");
+        System.out.println("6. Assign Teacher to Course");
+        System.out.println("7. Assign Teacher to Section");
+        System.out.println("8. Assign Student to Section");
+        System.out.println("9. Additional Options");
+        System.out.println("10. Display Students");
+        System.out.println("11. Display Teachers");
+        System.out.println("12. Display Courses");
+        System.out.println("13 Display Sections");
+        System.out.println("14. logout");
+        collegeSystem.saveData();
+    }
+
+    private static void AdminMenu() {
+        System.out.println("1. Add Student");
+        System.out.println("2. Add Teacher");
+        System.out.println("3. Add Course");
+        System.out.println("4. add Section");
+        System.out.println("5. Enroll Student in Course");
+        System.out.println("6. Assign Teacher to Course");
+        System.out.println("7. Assign Teacher to Section");
+        System.out.println("8. Assign Student to Section");
+        System.out.println("9. Additional Options");
+        System.out.println("10. Display Students");
+        System.out.println("11. Display Teachers");
+        System.out.println("12. Display Courses");
+        System.out.println("13 Display Sections");
+        System.out.println("14. logout");
+        collegeSystem.saveData();
+
+    }
+
+    private static void TeacherMenu() {
+        System.out.println("1. Display My Courses");
+        System.out.println("2. Display My Sections");
+        System.out.println("3. Display Personal Information");
+        System.out.println("4. Change Password");
+        System.out.println("5. logout");
+        collegeSystem.saveData();
+    }
+
+    private static void StudentMenu() {
+        System.out.println("1. Display My Courses");
+        System.out.println("2. Display My Teachers");
+        System.out.println("3. Display Personal Information");
+        System.out.println("4. Change login credentials");
+        System.out.println("5. logout");
+        collegeSystem.saveData();
+    }
+
+    static void functions(int choice) {
+        while (true) {
             switch (choice) {
                 case 1:
                     System.out.print("Enter student name: ");
@@ -165,8 +299,6 @@ public class Main {
                         }
                     }
                     Section section = new Section(sectionName);
-                    // see, if you want to add the option, of assigning teachers, while the section
-                    // is getting created or late, the code is not very hard, i can do it later.
                     collegeSystem.addSection(section);
                     System.out.println("Section Created successfully");
                     break;
@@ -294,23 +426,143 @@ public class Main {
                     }
                     break;
                 case 14:
-                    System.out.println("Exiting College Management System.");
-                    scanner.close();
                     collegeSystem.saveStateToFile("Students.txt", Student.class);
                     collegeSystem.saveStateToFile("Teachers.txt", Teacher.class);
                     collegeSystem.saveStateToFile("Sections.txt", Section.class);
                     collegeSystem.saveStateToFile("Courses.txt", Course.class);
-                    exit = true;
-
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
+            }
+            if (CreatorLogged) {
+                PavanMenu();
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice == 0) {
+                    System.out.print("Enter Admin Name: ");
+                    String adminName = scanner.nextLine();
+                    System.out.print("Enter the Admin Password: ");
+                    String adminPassword = scanner.nextLine();
 
-                    if (exit) {
-                        continue;
-                    }
+                    Admin admin = new Admin(adminName, adminPassword);
+                    collegeSystem.addAdmin(admin);
+                    System.out.println("Admin added successfully");
+                } else {
+                    continue;
+                }
+            }
+            if (AdminLogged) {
+                AdminMenu();
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                continue;
             }
         }
+    }
+
+    private static void PavanControls() {
+        System.out.println("Welcome Creator, This is the Super Menu");
+        CreatorLogged = true;
+        boolean exit = false;
+        while (true) {
+            PavanMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice == 0) {
+                System.out.print("Enter Admin Name: ");
+                String adminName = scanner.nextLine();
+                System.out.print("Enter the Admin Password: ");
+                String adminPassword = scanner.nextLine();
+
+                Admin admin = new Admin(adminName, adminPassword);
+                collegeSystem.addAdmin(admin);
+                System.out.println("Admin added successfully");
+
+            } else {
+                functions(choice);
+                System.out.print("Are you sure you want to log out y/n");
+                String response = scanner.nextLine();
+                if (response.equals("y")) {
+                    CreatorLogged = false;
+                    return;
+                } else {
+                    continue;
+                }
+            }
+        }
+    }
+
+    private static void AdminControls() {
+        AdminLogged = true;
+        System.out.println("Welcome Admin, This is Menu");
+        boolean exit = false;
+        while (true) {
+            AdminMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            functions(choice);
+            System.out.print("Are you sure you want to log out y/n");
+            String response = scanner.nextLine();
+            if (response.equals("y")) {
+                AdminLogged = false;
+                return;
+            } else {
+                continue;
+            }
+        }
+    }
+
+    private static void TeacherControls(Teacher teacher) {
+        System.out.println("Logged in successfully");
+        while (true) {
+            TeacherMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("This are all the Courses you are teaching: ");
+                    pavan_dynamic_array teacherCourses = teacher.getCourses();
+                    for (int i = 0; i < teacherCourses.size(); i++) {
+                        Course course = (Course) teacherCourses.get(i);
+                        System.out.println(course.getName());
+                    }
+                    break;
+                case 2:
+                    System.out.println("This are all your Sections you are teaching: ");
+                    pavan_dynamic_array teacherSections = teacher.getSections();
+                    for (int i = 0; i < teacherSections.size(); i++) {
+                        Section section = (Section) teacherSections.get(i);
+                        System.out.println(section.getName());
+                    }
+                    break;
+                case 3:
+                    System.out.println("This is you personal Information");
+                    System.out.println("Name: " + teacher.getName());
+                    System.out.println("RollNo" + teacher.getRollNo());
+                    // add more personal information: phone number, emailaddress, birthdate etc;
+                    break;
+                
+                case 4:
+                    System.out.println("Presently you can only change your password, deal with it later");
+                    String newPassword = scanner.nextLine();
+                    teacher.setPassword(newPassword);
+                    System.out.println("Password Successfully changed");
+                    break;
+                
+                case 5: 
+                System.out.println("Logging out now");
+                return;
+            }
+
+
+        }
+
+    }
+
+    private static void StudentControls(Student student) {
+        System.out.println("You have Successfully logged in");
+        StudentMenu();
     }
 
     private static Student getStudentByRollNo(ManagementSystem collegeSystem, String rollNo) {
@@ -367,4 +619,5 @@ public class Main {
         }
         return null;
     }
+
 }

@@ -1,20 +1,28 @@
 import java.io.Serializable;
 
-public class Student {
+public class Student  implements Serializable {
     private static int  temp = 100;
     private String name;
     private String rollNo;
     private String section;
+    private String EmailAddress;
+    private String Password;
     private pavan_dynamic_array enrolledCourses;
 
     public Student(String name) {
         this.name = name;
         this.rollNo = generateStudentRollNumber();
+        this.EmailAddress = generateEmailId();
+        this.Password = "Password";
         enrolledCourses = new pavan_dynamic_array(2);
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword(){
+        return Password;
     }
 
 
@@ -37,6 +45,11 @@ public class Student {
     public void enrollInCourse(Course course) {
         enrolledCourses.add(course);
         course.addStudent(this);
+    }
+
+    private String generateEmailId(){
+        String emailid = this.name + "@bmu.edu.in";
+        return emailid;
     }
 
     public void displayStudentInfo() {

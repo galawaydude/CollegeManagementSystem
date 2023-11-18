@@ -1,6 +1,0 @@
-Students:
-Name: Pavan
-Roll No: BML2022Stu100
-Section: CSE12
-Courses Enrolled in: Physics, 
-
