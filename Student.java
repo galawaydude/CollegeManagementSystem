@@ -21,6 +21,9 @@ public class Student  implements Serializable {
         return name;
     }
 
+    public void setPassword(String newPassword){
+        this.Password = newPassword;
+    }
     public String getPassword(){
         return Password;
     }

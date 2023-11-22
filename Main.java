@@ -518,7 +518,6 @@ public class Main {
             TeacherMenu();
             int choice = scanner.nextInt();
             scanner.nextLine();
-
             switch (choice) {
                 case 1:
                     System.out.println("This are all the Courses you are teaching: ");
@@ -554,15 +553,65 @@ public class Main {
                 System.out.println("Logging out now");
                 return;
             }
-
-
         }
 
     }
 
     private static void StudentControls(Student student) {
-        System.out.println("You have Successfully logged in");
-        StudentMenu();
+        System.out.println("Logged in successfully");
+        while (true) {
+            StudentMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("This are all the Courses you are enrolled in: ");
+                    pavan_dynamic_array studentCourses = student.getEnrolledCourses();
+                    for (int i = 0; i < studentCourses.size(); i++) {
+                        Course course = (Course) studentCourses.get(i);
+                        System.out.println(course.getName());
+                    }
+                    break;
+                case 2:
+                    System.out.println("This are all the teachers who are teaching you");
+                    String studentSection = student.getSection();
+                    pavan_dynamic_array stuff = collegeSystem.getSections();
+
+                    Section sectionIwant = null;
+
+                    for(int i = 0; i < stuff.size(); i++){
+                        Section section = (Section) stuff.get(i);
+                        if(section.getName().equals(studentSection)){
+                            sectionIwant = section;
+                        }
+
+                    pavan_dynamic_array teachersOfThisSection = sectionIwant.getTeachers();
+                    for(i = 0; i < teachersOfThisSection.size(); i++){
+                        Teacher teacher = (Teacher) teachersOfThisSection.get(i);
+                        System.out.println(teacher.getName()); 
+                    }
+                    }
+                    break;
+                case 3:
+                    System.out.println("This is you personal Information");
+                    System.out.println("Name: " +student.getName());
+                    System.out.println("RollNo" +student.getRollNo());
+                    // add more personal information: phone number, emailaddress, birthdate etc;
+                    break;
+                
+                case 4:
+                    System.out.println("Presently you can only change your password, deal with it later");
+                    String newPassword = scanner.nextLine();
+                    student.setPassword(newPassword);
+                    System.out.println("Password Successfully changed");
+                    break;
+                
+                case 5: 
+                System.out.println("Logging out now");
+                return;
+            }
+        }
+
     }
 
     private static Student getStudentByRollNo(ManagementSystem collegeSystem, String rollNo) {
