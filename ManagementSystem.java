@@ -264,7 +264,7 @@ public class ManagementSystem implements Serializable {
         admins.add(admin);
     }
 
-    public pavan_dynamic_array getAdmin(){
+    public pavan_dynamic_array getAdmins(){
         return admins;
     }
 
@@ -335,7 +335,7 @@ public class ManagementSystem implements Serializable {
                 return section;
             }
         }
-        return null; // Return null if the section is not found
+        return null; 
     }
 
     public Course getCourseByName(String courseName) {

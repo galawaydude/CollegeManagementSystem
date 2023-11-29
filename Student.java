@@ -5,7 +5,9 @@ public class Student  implements Serializable {
     private String name;
     private String rollNo;
     private String section;
-    private String EmailAddress;
+    private String EmailAddress = "";
+    private String PhoneNo = "";
+    private String DateOfBirth = "";
     private String Password;
     private pavan_dynamic_array enrolledCourses;
 
@@ -17,6 +19,17 @@ public class Student  implements Serializable {
         enrolledCourses = new pavan_dynamic_array(2);
     }
 
+    public String getPhoneNo(){
+        return PhoneNo;
+    }
+
+    public String getDOB(){
+        return DateOfBirth;
+    }
+    public String getEmailID(){
+        return EmailAddress;
+    }
+
     public String getName() {
         return name;
     }
@@ -26,6 +39,21 @@ public class Student  implements Serializable {
     }
     public String getPassword(){
         return Password;
+    }
+
+    public void setName(String newName){
+        this.name = newName;
+    }
+
+      public void setEmailAddress(String newEmailAddress){
+        this.EmailAddress = newEmailAddress;
+    }
+
+      public void setPhoneNo(String newPhoneNo){
+        this.PhoneNo = newPhoneNo;
+    }
+      public void setDateOfBirth(String newDataOfBirth){
+        this.DateOfBirth = newDataOfBirth;
     }
 
 

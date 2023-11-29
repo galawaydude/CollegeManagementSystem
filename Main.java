@@ -94,8 +94,8 @@ public class Main {
 
     private static void LoginMenu() {
         System.out.println("LOGIN PAGE \n");
-        System.out.println("LOGIN AS: :");
-        System.out.println("1. Pavan ");
+        System.out.println("LOGIN AS: ");
+        System.out.println("1. Creator ");
         System.out.println("2. Admin");
         System.out.println("3. Teacher");
         System.out.println("4. Student");
@@ -103,6 +103,10 @@ public class Main {
     }
 
     private static void PavanMenu() {
+        System.out.println("-4. Save the contents of the progam to txt files, only you can do this btw");
+        System.out.println("-3. Display Asmins");
+        System.out.println("-2. Display The information of a Teacher");
+        System.out.println("-1. Display The information of a Student");
         System.out.println("0. Add Admin");
         System.out.println("1. Add Student");
         System.out.println("2. Add Teacher");
@@ -116,7 +120,7 @@ public class Main {
         System.out.println("10. Display Students");
         System.out.println("11. Display Teachers");
         System.out.println("12. Display Courses");
-        System.out.println("13 Display Sections");
+        System.out.println("13. Display Sections");
         System.out.println("14. logout");
         collegeSystem.saveData();
     }
@@ -143,19 +147,27 @@ public class Main {
     private static void TeacherMenu() {
         System.out.println("1. Display My Courses");
         System.out.println("2. Display My Sections");
-        System.out.println("3. Display Personal Information");
-        System.out.println("4. Change Password");
-        System.out.println("5. logout");
+        System.out.println("3. Set Personal Information");
+        System.out.println("4. Display Personal Information");
+        System.out.println("5. Change Password");
+        System.out.println("6. logout");
         collegeSystem.saveData();
     }
 
     private static void StudentMenu() {
         System.out.println("1. Display My Courses");
         System.out.println("2. Display My Teachers");
-        System.out.println("3. Display Personal Information");
-        System.out.println("4. Change login credentials");
-        System.out.println("5. logout");
+        System.out.println("3. Set Personal Information");
+        System.out.println("4. Display Personal Information");
+        System.out.println("5. Change login credentials");
+        System.out.println("6. logout");
         collegeSystem.saveData();
+    }
+
+    private static void InfoChangeMenu(){
+        System.out.println("1. Change my EmailAddress");
+        System.out.println("2. Change my Name");
+        System.out.println("3. Change my PhoneNumber");
     }
 
     static void functions(int choice) {
@@ -426,10 +438,6 @@ public class Main {
                     }
                     break;
                 case 14:
-                    collegeSystem.saveStateToFile("Students.txt", Student.class);
-                    collegeSystem.saveStateToFile("Teachers.txt", Teacher.class);
-                    collegeSystem.saveStateToFile("Sections.txt", Section.class);
-                    collegeSystem.saveStateToFile("Courses.txt", Course.class);
                     return;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
@@ -478,7 +486,66 @@ public class Main {
                 collegeSystem.addAdmin(admin);
                 System.out.println("Admin added successfully");
 
-            } else {
+            }
+            else if(choice == -2){
+                boolean finder = false;
+                System.out.println("Enter the rollNo of the teacher whose information you want");
+                String teacherToSearch = scanner.nextLine();
+                pavan_dynamic_array teacherArrayAgain = collegeSystem.getTeachers();
+                for(int i = 0; i < teacherArrayAgain.size(); i++){
+                    Teacher teacherAgain = (Teacher) teacherArrayAgain.get(i);
+                    if(teacherAgain.getRollNo().equals(teacherToSearch)){
+                        finder = true;
+                        System.out.println("Name: " + teacherAgain.getName());
+                        System.out.println("RollNo" + teacherAgain.getRollNo());
+                        System.out.println("PhoneNo" + teacherAgain.getPhoneNo());
+                        System.out.println("EmailAddress" + teacherAgain.getEmailID());
+                        System.out.println("DateOfBirth" + teacherAgain.getDOB());
+                    }
+                }
+                if(finder = false){
+                    System.out.println("Teacher not found");
+                } 
+            } 
+            else if(choice == -1){
+                boolean finder = false;
+                System.out.println("Enter the rollNo of the student whose information you want");
+                String studentToSearch = scanner.nextLine();
+                pavan_dynamic_array studentArrayAgain = collegeSystem.getStudents();
+                for(int i = 0; i < studentArrayAgain.size(); i++){
+                    Student studentAgain = (Student) studentArrayAgain.get(i);
+                    if(studentAgain.getRollNo().equals(studentToSearch)){
+                        finder = true;
+                        System.out.println("Name: " + studentAgain.getName());
+                        System.out.println("RollNo" + studentAgain.getRollNo());
+                        System.out.println("PhoneNo" + studentAgain.getPhoneNo());
+                        System.out.println("EmailAddress" + studentAgain.getEmailID());
+                        System.out.println("DateOfBirth" + studentAgain.getDOB());
+                    }
+                }
+                if(finder = false){
+                    System.out.println("Student not found");
+                } 
+
+            }
+            else if(choice == -3){
+                System.out.println("This is a list of all the admins");
+
+                pavan_dynamic_array AdminArray = collegeSystem.getAdmins();
+                for(int i = 0; i < AdminArray.size(); i++){
+                    Admin Admin = (Admin) AdminArray.get(i);
+                    System.out.println("Name: " + Admin.getUsername());
+                }
+            }
+
+            else if(choice == -4){
+                System.out.println("Saving data into text files");
+                collegeSystem.saveStateToFile("Students.txt", Student.class);
+                collegeSystem.saveStateToFile("Teachers.txt", Teacher.class);
+                collegeSystem.saveStateToFile("Sections.txt", Section.class);
+                collegeSystem.saveStateToFile("Courses.txt", Course.class);
+            }
+            else {
                 functions(choice);
                 System.out.print("Are you sure you want to log out y/n");
                 String response = scanner.nextLine();
@@ -535,23 +602,37 @@ public class Main {
                         System.out.println(section.getName());
                     }
                     break;
+
                 case 3:
+                    System.out.println("Which information do you want to change");
+                    System.out.println("1. Change Name");
+                    System.out.println("2. EmailAddress");
+                    System.out.println("3. PhoneNo");
+                    System.out.println("4. DateOfBirth");
+                    int teacherChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    TeacherStuff(teacherChoice, teacher);
+
+                    break;
+
+                case 4:
                     System.out.println("This is you personal Information");
                     System.out.println("Name: " + teacher.getName());
                     System.out.println("RollNo" + teacher.getRollNo());
-                    // add more personal information: phone number, emailaddress, birthdate etc;
+                    System.out.println("PhoneNo" + teacher.getPhoneNo());
+                    System.out.println("EmailAddress" + teacher.getEmailID());
+                    System.out.println("DateOfBirth" + teacher.getDOB());
                     break;
-                
-                case 4:
-                    System.out.println("Presently you can only change your password, deal with it later");
+                case 5:
+                    System.out.println("Password change Menu");
                     String newPassword = scanner.nextLine();
                     teacher.setPassword(newPassword);
                     System.out.println("Password Successfully changed");
                     break;
-                
-                case 5: 
-                System.out.println("Logging out now");
-                return;
+
+                case 6:
+                    System.out.println("Logging out now");
+                    return;
             }
         }
 
@@ -579,41 +660,50 @@ public class Main {
 
                     Section sectionIwant = null;
 
-                    for(int i = 0; i < stuff.size(); i++){
+                    for (int i = 0; i < stuff.size(); i++) {
                         Section section = (Section) stuff.get(i);
-                        if(section.getName().equals(studentSection)){
+                        if (section.getName().equals(studentSection)) {
                             sectionIwant = section;
                         }
 
-                    pavan_dynamic_array teachersOfThisSection = sectionIwant.getTeachers();
-                    for(i = 0; i < teachersOfThisSection.size(); i++){
-                        Teacher teacher = (Teacher) teachersOfThisSection.get(i);
-                        System.out.println(teacher.getName()); 
-                    }
+                        pavan_dynamic_array teachersOfThisSection = sectionIwant.getTeachers();
+                        for (i = 0; i < teachersOfThisSection.size(); i++) {
+                            Teacher teacher = (Teacher) teachersOfThisSection.get(i);
+                            System.out.println(teacher.getName());
+                        }
                     }
                     break;
-                case 3:
-                    System.out.println("This is you personal Information");
-                    System.out.println("Name: " +student.getName());
-                    System.out.println("RollNo" +student.getRollNo());
-                    // add more personal information: phone number, emailaddress, birthdate etc;
-                    break;
-                
+                 case 3:
+                    System.out.println("Which information do you want to change");
+                    System.out.println("1. Change Name");
+                    System.out.println("2. EmailAddress");
+                    System.out.println("3. PhoneNo");
+                    System.out.println("4. DateOfBirth");
+                    int studentChoice = scanner.nextInt();
+                    scanner.nextLine();
+                    StudentStuff(studentChoice, student);
                 case 4:
+                    System.out.println("This is you personal Information");
+                    System.out.println("Name: " + student.getName());
+                    System.out.println("RollNo" + student.getRollNo());
+                    System.out.println("PhoneNo" + student.getPhoneNo());
+                    System.out.println("EmailAddress" + student.getEmailID());
+                    System.out.println("DateOfBirth" + student.getDOB());
+                    break;
+
+                case 5:
                     System.out.println("Presently you can only change your password, deal with it later");
                     String newPassword = scanner.nextLine();
                     student.setPassword(newPassword);
                     System.out.println("Password Successfully changed");
                     break;
-                
-                case 5: 
-                System.out.println("Logging out now");
-                return;
+
+                case 6:
+                    System.out.println("Logging out now");
+                    return;
             }
         }
-
     }
-
     private static Student getStudentByRollNo(ManagementSystem collegeSystem, String rollNo) {
         pavan_dynamic_array students = collegeSystem.getStudents();
         for (int i = 0; i < students.size(); i++) {
@@ -669,4 +759,60 @@ public class Main {
         return null;
     }
 
+    private static void TeacherStuff(int teacherChoice, Teacher teacher){
+        if(teacherChoice == 1){
+            System.out.println("You have opted to set your name");
+            System.out.println("Enter the new name");
+            String newName = scanner.nextLine();
+            teacher.setName(newName);
+        }
+         if(teacherChoice == 2){
+            System.out.println("You have opted to set your EmailAddress");
+            System.out.println("Enter the EmailAddress");
+            String newEmailAddress = scanner.nextLine();
+            teacher.setEmailAddress(newEmailAddress);
+        }
+         if(teacherChoice == 3){
+            System.out.println("You have opted to set your phoneNo");
+            System.out.println("Enter the phoneNo");
+            String newPhoneNo = scanner.nextLine();
+            teacher.setPhoneNo(newPhoneNo);
+        }
+         if(teacherChoice == 4){
+            System.out.println("You have opted to set your DateOfBirth");
+            System.out.println("Enter the DateOfBirth");
+            String newDOB = scanner.nextLine();
+            teacher.setDateOfBirth(newDOB);
+        }
+        return;
+    }
+
+        private static void StudentStuff(int studentChoice, Student student){
+        if(studentChoice == 1){
+            System.out.println("You have opted to set your name");
+            System.out.println("Enter the new name");
+            String newName = scanner.nextLine();
+            student.setName(newName);
+        }
+         if(studentChoice == 2){
+            System.out.println("You have opted to set your EmailAddress");
+            System.out.println("Enter the EmailAddress");
+            String newEmailAddress = scanner.nextLine();
+            student.setEmailAddress(newEmailAddress);
+        }
+         if(studentChoice == 3){
+            System.out.println("You have opted to set your phoneNo");
+            System.out.println("Enter the phoneNo");
+            String newPhoneNo = scanner.nextLine();
+            student.setPhoneNo(newPhoneNo);
+        }
+         if(studentChoice == 4){
+            System.out.println("You have opted to set your DateOfBirth");
+            System.out.println("Enter the DateOfBirth");
+            String newDOB = scanner.nextLine();
+            student.setDateOfBirth(newDOB);
+        }
+        return;
+    }
+    
 }
