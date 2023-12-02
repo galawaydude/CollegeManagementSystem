@@ -92,14 +92,6 @@ public class ManagementSystem implements Serializable {
             System.err.println("Error loading data: " + e.getMessage());
         }
     }
-    public void FileStateDeleter(String filename) {
-        try (FileOutputStream writer = new FileOutputStream("filename.txt")) {
-            writer.write(("").getBytes());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void saveStateToFile(String filename, Class<?> clazz) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
@@ -249,7 +241,7 @@ public class ManagementSystem implements Serializable {
                 return admin;
             }
         }
-        return null;
+        return null; 
     }
 
     public void addStudent(Student student) {
@@ -268,11 +260,11 @@ public class ManagementSystem implements Serializable {
         sections.add(section);
     }
 
-    public void addAdmin(Admin admin) {
+    public void addAdmin(Admin admin){
         admins.add(admin);
     }
 
-    public pavan_dynamic_array getAdmins() {
+    public pavan_dynamic_array getAdmins(){
         return admins;
     }
 
@@ -343,7 +335,7 @@ public class ManagementSystem implements Serializable {
                 return section;
             }
         }
-        return null;
+        return null; 
     }
 
     public Course getCourseByName(String courseName) {
