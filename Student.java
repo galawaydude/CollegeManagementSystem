@@ -1,11 +1,20 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+
 public class Student  implements Serializable {
-    private static int  temp = 100;
+    private static int temp;
+    static {
+        temp = loadTempStudent();
+    }
     private String name;
     private String rollNo;
     private String section;
-    private String EmailAddress = ""; // this is not being printed properly
+    private String EmailAddress = ""; 
     private String PhoneNo = "";
     private String DateOfBirth = "";
     private String Password;
@@ -97,7 +106,27 @@ public class Student  implements Serializable {
     private String generateStudentRollNumber() {
         String rollNumber =  "BML" + 2022 + "Stu" + temp;
         temp++;
+        saveTempStudent(); 
         return rollNumber;
+    }
+
+     public static void  saveTempStudent() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("rollCountStudent.ser"))) {
+            out.writeObject(temp);
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+
+    public static int loadTempStudent() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("rollCountStudent.ser"))) {
+            temp = (int) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading data: " + e.getMessage());
+            temp = 100; 
+        }
+        return temp;
     }
 
 }

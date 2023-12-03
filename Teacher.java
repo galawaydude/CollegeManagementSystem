@@ -1,7 +1,15 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Teacher implements Serializable{
-    private static int temp = 100;
+    private static int temp;
+    static {
+        temp = loadTempTeacher();
+    }
     private String name;
     private String rollNo;
     private String EmailAddress = "";
@@ -79,6 +87,7 @@ public class Teacher implements Serializable{
     private String generateTeacherRollNumber() {
         String rollNumber =  "BML" + 2022 + "tch" + temp;
         temp++;
+        saveTempTeacher();
         return rollNumber;
     }
 
@@ -96,9 +105,26 @@ public class Teacher implements Serializable{
             System.out.println(section.getName());
         }
         System.out.println("Course enrolled in ");
-        for(int i = 0; i < sections.size(); i++){
+        for(int i = 0; i < courses.size(); i++){
             Course course = (Course) courses.get(i);
             System.out.println(course.getName());
         }
+    }
+     public static void  saveTempTeacher() {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("rollCountTeacher.ser"))) {
+            out.writeObject(temp);
+        } catch (IOException e) {
+            System.err.println("Error saving data: " + e.getMessage());
+        }
+    }
+    
+    public static int loadTempTeacher() {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("rollCountTeacher.ser"))) {
+            temp = (int) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading data: " + e.getMessage());
+            temp = 100; 
+        }
+        return temp;
     }
 }

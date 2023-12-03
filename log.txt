@@ -1,0 +1,168 @@
+A new Section was added Name: CSE1
+A new Section was added Name: CSE2
+A new Section was added Name: CSE3
+A new Section was added Name: CSE4
+A new Section was added Name: CSE5
+A new course was added Name: DBMS
+A new course was added Name: JAVA
+A new course was added Name: OOPS
+A new course was added Name: DAA
+A new course was added Name: ECS
+A new course was added Name: FDL
+A new course was added Name: AL/ML
+A new course was added Name: DevOps
+A new course was added Name: OpSys
+A new course was added Name: WebDev
+A new course was added Name: DC&CN
+A new course was added Name: CyberSecurity
+A new Teacher was added Name: Harsh Sharma
+A new Teacher was added Name: Kiran Khattar
+A new Teacher was added Name: Manisha Saini
+A new Teacher was added Name: Yogesh Gupta
+A new Teacher was added Name: Atul Mishra
+A new Teacher was added Name: Kiran Sharma
+A new Teacher was added Name: Nishtha Phutela
+A new Teacher was added Name: Nandita Choudary
+A new Teacher was added Name: Nirupuma Maniprasad
+A new Teacher was added Name: Anil Kapoor
+A new Teacher was added Name: Meera Singh
+A new Teacher was added Name: Rohit Verma
+A new Teacher was added Name: Lelouch Lamperouge
+A new Teacher was added Name: Erza Scarlet
+A new Teacher was added Name: Kakashi Hatake
+A new Teacher was added Name: Bulma Briefs
+A new Teacher was added Name: Rem
+A new Teacher was added Name: Hiei
+A new student was added Name: Guneet Chawla
+A new student was added Name: Anjali Mehta
+A new student was added Name: Pavan Kalvakota
+A new student was added Name: Sanskar Gupta
+A new student was added Name: Lakkshya Gupta
+A new student was added Name: Nikhil Kumar Tomar
+A new student was added Name: Vishwajeet Tripati
+A new student was added Name: Manav Sharma
+Student was assigned a sectionTeacherRollNo: BML2022tch100Section: CSE1
+Student was assigned a sectionTeacherRollNo: BML2022tch100Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch100Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch101Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch101Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch102Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch102Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch102Section: CSE5
+Student was assigned a sectionTeacherRollNo: BML2022tch103Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch103Section: CSE5
+Student was assigned a sectionTeacherRollNo: BML2022tch104Section: CSE1
+Student was assigned a sectionTeacherRollNo: BML2022tch105Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch106Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch106Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch107Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch109Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch109Section: CSE5
+Student was assigned a sectionTeacherRollNo: BML2022tch110Section: CSE1
+Student was assigned a sectionTeacherRollNo: BML2022tch110Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch111Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch111Section: CSE3
+Student was assigned a sectionTeacherRollNo: Lelouch LamperougeSection: CSE1
+Student was assigned a sectionTeacherRollNo: Lelouch LamperougeSection: n
+Student was assigned a sectionTeacherRollNo: BML2022tch112Section: CSE1
+Student was assigned a sectionTeacherRollNo: BML2022tch112Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch112Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch113Section: CSE2
+Student was assigned a sectionTeacherRollNo: BML2022tch113Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch114Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch114Section: CSE4
+Student was assigned a sectionTeacherRollNo: BML2022tch114Section: CSE5
+Student was assigned a sectionTeacherRollNo: BML2022tch115Section: CSE3
+Student was assigned a sectionTeacherRollNo: BML2022tch115Section: CSE5
+Student was assigned a sectionTeacherRollNo: BML2022tch116Section: CSE1
+Student was assigned a sectionTeacherRollNo: BML2022tch117Section: CSE2
+A new student was added Name: Raghav Malik
+A new student was added Name: ShreyaXRaghav
+Student was assigned a courseStudentRollNo: BML2022Stu102Course: DBMS
+Student was assigned a courseStudentRollNo: BML2022Stu102Course: FDss
+Student was assigned a courseStudentRollNo: BML2022Stu102Course: FDL
+A new student was added Name: Purav Malik
+A new student was added Name: Siddarth Chugh
+A new student was added Name: Bhargav Srinivas
+A new student was added Name: Shivam Purohit
+A new student was added Name: David Royal
+A new student was added Name: Siddarth Kalla
+A new student was added Name: Ratul Pal
+A new student was added Name: Divas Sharma
+A new student was added Name: Rishit Abhilash
+A new student was added Name: Namrata Dhingra
+A new student was added Name: Harleen Kundi
+A new student was added Name: Shreya Khandelwal
+A new student was added Name: Anirudh Boddu 
+A new student was added Name: Naruto Uzumaki
+A new student was added Name: Monkey Luffy
+A new student was added Name: Sakura Haruno
+A new student was added Name: Natsu Dragneel
+A new student was added Name: Gon Freecss
+A new student was added Name: Killua Zoldyck
+A new student was added Name: Kurapika
+A new student was added Name: Ichigo Kurosaki
+A new student was added Name: Hinata Hyuga
+A new student was added Name: Light Yagami
+A new student was added Name: Kagome Higurashi
+A new student was added Name: Sesshomaru
+A new student was added Name: Sango
+A new student was added Name: L
+A new student was added Name: Alucard
+A new student was added Name: Winry Rockbell
+A new student was added Name: Haku
+A new student was added Name: Bulat
+A new student was added Name: Yoruichi Shihouin
+A new student was added Name: Misa Amane
+A new student was added Name: Rias Gremory
+A new student was added Name: Shiro
+A new student was added Name: Holo
+A new student was added Name: Gojo Satoru
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: OpSys
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: AI/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: AL/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: a
+Teacher was assigned a courseTeacherRollNo: BML2022tch101Course: JAVA
+Teacher was assigned a courseTeacherRollNo: BML2022tch101Course: WebDev
+Teacher was assigned a courseTeacherRollNo: BML2022tch101Course: OOPS
+Teacher was assigned a courseTeacherRollNo: BML2022tch101Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch102Course: JAVA
+Teacher was assigned a courseTeacherRollNo: BML2022tch102Course: DevOps
+Teacher was assigned a courseTeacherRollNo: BML2022tch102Course: h
+Teacher was assigned a courseTeacherRollNo: BML2022tch103Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch103Course: DevOps
+Teacher was assigned a courseTeacherRollNo: BML2022tch103Course: OOPS
+Teacher was assigned a courseTeacherRollNo: BML2022tch104Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch104Course: AI/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch104Course: AL/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch104Course: n
+Teacher was assigned a courseTeacherRollNo: BML2022tch105Course: DBMS
+Teacher was assigned a courseTeacherRollNo: BML2022tch105Course: FDL
+Teacher was assigned a courseTeacherRollNo: BML2022tch106Course: DBMS
+Teacher was assigned a courseTeacherRollNo: BML2022tch106Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch106Course: OpSys
+Teacher was assigned a courseTeacherRollNo: BML2022tch106Course: n
+Teacher was assigned a courseTeacherRollNo: BML2022tch107Course: ECS
+Teacher was assigned a courseTeacherRollNo: BML2022tch109Course: DC&CN
+Teacher was assigned a courseTeacherRollNo: BML2022tch109Course: CyberSecurity
+Teacher was assigned a courseTeacherRollNo: BML2022tch110Course: DC&CN
+Teacher was assigned a courseTeacherRollNo: BML2022tch110Course: WebDev
+Teacher was assigned a courseTeacherRollNo: BML2022tch111Course: CyberSecurity
+Teacher was assigned a courseTeacherRollNo: BML2022tch111Course: AL/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch112Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch112Course: OpSys
+Teacher was assigned a courseTeacherRollNo: BML2022tch112Course: AL/ML
+Teacher was assigned a courseTeacherRollNo: BML2022tch113Course: JAVA
+Teacher was assigned a courseTeacherRollNo: BML2022tch113Course: WebDev
+Teacher was assigned a courseTeacherRollNo: BML2022tch113Course: OOPS
+Teacher was assigned a courseTeacherRollNo: BML2022tch113Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch114Course: JAVA
+Teacher was assigned a courseTeacherRollNo: BML2022tch114Course: DevOps
+Teacher was assigned a courseTeacherRollNo: BML2022tch115Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch115Course: DevOps
+Teacher was assigned a courseTeacherRollNo: BML2022tch115Course: OOPS
+Teacher was assigned a courseTeacherRollNo: BML2022tch116Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch116Course: DevOps
+Teacher was assigned a courseTeacherRollNo: BML2022tch117Course: DC&CN
+Teacher was assigned a courseTeacherRollNo: BML2022tch117Course: AL/ML

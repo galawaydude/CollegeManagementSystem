@@ -7,11 +7,12 @@ public class Main {
     static jdbcStuff jdbcstuff = new jdbcStuff();
 
     public static void main(String[] args) {
+        boolean exit = false;
         collegeSystem.loadData();
         while (true) {
             LoginMenu();
             int choice = -1;
-            while (true) {
+             while (true) {
                 System.out.print("Enter your choice: ");
                 try {
                     choice = scanner.nextInt();
@@ -37,11 +38,14 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Exiting the system. Goodbye!");
-                    System.exit(0);
+                    exit = true;
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
+            }
+            if (exit == true) {
+                return;
             }
         }
     }
@@ -177,6 +181,7 @@ public class Main {
         System.out.println("4. Display Personal Information");// this shit comes from database;
         System.out.println("5. Change login credentials");
         System.out.println("6. logout");
+        collegeSystem.saveData();
     }
 
     private static void CreatorOptions() {
@@ -189,6 +194,7 @@ public class Main {
         System.out.println(" 4. Display The information of a Teacher");
         System.out.println(" 5. Display The information of a Student");
         System.out.println(" 0. Previous Page");
+        collegeSystem.saveData();
     }
 
     private static void EntityCreationOptions() {
@@ -200,6 +206,7 @@ public class Main {
         System.out.println(" 3. Add Course");
         System.out.println(" 4. Add Section");
         System.out.println(" 0. Previous Page");
+        collegeSystem.saveData();
     }
 
     private static void EntityAssignmentOptions() {
@@ -210,6 +217,7 @@ public class Main {
         System.out.println(" 2. Assign Teacher to Course");
         System.out.println(" 3. Assign Teacher to Section");
         System.out.println(" 0. Previous Page");
+        collegeSystem.saveData();
     }
 
     private static void EntityDisplayOptions() {
@@ -238,7 +246,7 @@ public class Main {
 
     private static void CreatorControls() {
         System.out.println("Logged in Successfully \n");
-        System.out.println("Welcome Creator (pavan) ");
+        System.out.println("Welcome Creator (pavan(I wrote the whole program)) ");
         while (true) {
             System.out.println();
             CreatorMenu();
@@ -255,187 +263,276 @@ public class Main {
                 }
             }
             if (choice == 0) {
-                while(true){
-                CreatorOptions();
-                System.out.print("Enter your choice: ");
-                int choiceAgain = -1;
                 while (true) {
+                    CreatorOptions();
                     System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StuffSaver();
+                    }
+                    if (choiceAgain == 2) {
+                        AdminCreator();
+                    }
+                    if (choiceAgain == 3) {
+                        DisplayAdmins();
+                    }
+                    if (choiceAgain == 4) {
+                        TeacherStalker();
+                    }
+                    if (choiceAgain == 5) {
+                        StudentStalker();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StuffSaver();
-                }
-                if (choiceAgain == 2) {
-                    AdminCreator();
-                }
-                if (choiceAgain == 3) {
-                    DisplayAdmins();
-                }
-                if (choiceAgain == 4) {
-                    TeacherStalker();
-                }
-                if (choiceAgain == 5) {
-                    StudentStalker();
-                }
-                if (choiceAgain == 0){
-                    break;
-                }
-            }
             }
             if (choice == 1) {
-                while(true){
-                EntityCreationOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    
+                    EntityCreationOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            StudentCreator();
+                            System.out.println("If you want to add more students enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if (stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 2) {
+                        while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            TeacherCreator();
+                            System.out.println("If you want to add more teachers enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if(stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 3) {
+                        while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            CourseCreator();
+                            System.out.println("If you want to add more courses enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if (stuff.equalsIgnoreCase("y")){
+
+                            }
+
+                        }
+                    }
+                    if (choiceAgain == 4) {
+                        while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            SectionCreator();
+                            System.out.println("If you want to add more sections enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                    
+                                }
+
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } else if (stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentCreator();
-                }
-                if (choiceAgain == 2) {
-                    TeacherCreator();
-                }
-                if (choiceAgain == 3) {
-                    CourseCreator();
-                }
-                if (choiceAgain == 4) {
-                    SectionCreator();
-                }
-                if(choiceAgain == 0){
-                    break;
-                }
-            }
             }
             if (choice == 2) {
-                while(true){
-                EntityAssignmentOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    EntityAssignmentOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StudentCourse();
+                    }
+                    if (choiceAgain == 2) {
+                        TeacherCourse();
+                    }
+                    if (choiceAgain == 3) {
+                        TeacherSection();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentCourse();
-                }
-                if (choiceAgain == 2) {
-                    TeacherCourse();
-                }
-                if (choiceAgain == 3) {
-                    TeacherSection();
-                }
-                if (choiceAgain == 0) {
-                    break;
-                }
-            }
             }
             if (choice == 3) {
-                while(true){
-                EntityDisplayOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    EntityDisplayOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StudentDisplay();
+                    }
+                    if (choiceAgain == 2) {
+                        TeacherDisplay();
+                    }
+                    if (choiceAgain == 3) {
+                        CourseDisplay();
+                    }
+                    if (choiceAgain == 4) {
+                        SectionDisplay();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentDisplay();
-                }
-                if (choiceAgain == 2) {
-                    TeacherDisplay();
-                }
-                if (choiceAgain == 3) {
-                    CourseDisplay();
-                }
-                if (choiceAgain == 4) {
-                    SectionDisplay();
-                }
-                if (choiceAgain == 0){
-                    break;
-                }
-            }
             }
             if (choice == 5) {
                 System.out.println("Logging out");
                 return;
             }
             if (choice == 4) {
-                while(true){
-                AdditionalOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
-                        break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
+                    AdditionalOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
                     }
-                }
-                if (choiceAgain == 1) {
-                    System.out.print("Enter the name of the section: ");
-                    String sectionName = scanner.nextLine();
-                    jdbcstuff.displayStudentsOfSection(sectionName);
-                }
-                if (choiceAgain == 2) {
-                    System.out.print("Enter the name of the course: ");
-                    String courseName = scanner.nextLine();
-                    jdbcstuff.displayTeachersOfCourse(courseName);
-                }
-                if (choiceAgain == 3) {
-                    System.out.print("Enter the name of the student: ");
-                    String studentName = scanner.nextLine();
-                    jdbcstuff.displayCoursesOfStudent(studentName);
-                }
-                if (choiceAgain == 4) {
-                    System.out.println("Enter the name of the section");
-                    String sectionName = scanner.nextLine();
-                    jdbcstuff.displayTeachersOfSection(sectionName);
-                }
-                if (choiceAgain == 5) {
-                    jdbcstuff.displayCourselessTeachers();
-                }
-                if (choiceAgain == 6) {
-                    jdbcstuff.displayTeachersTeachingMultipleSections();
-                }
-                if(choiceAgain == 0){
-                    break;
-                }
+                    if (choiceAgain == 1) {
+                        System.out.print("Enter the name of the section: ");
+                        String sectionName = scanner.nextLine();
+                        jdbcstuff.displayStudentsOfSection(sectionName);
+                    }
+                    if (choiceAgain == 2) {
+                        System.out.print("Enter the name of the course: ");
+                        String courseName = scanner.nextLine();
+                        jdbcstuff.displayTeachersOfCourse(courseName);
+                    }
+                    if (choiceAgain == 3) {
+                        System.out.print("Enter the name of the student: ");
+                        String studentName = scanner.nextLine();
+                        jdbcstuff.displayCoursesOfStudent(studentName);
+                    }
+                    if (choiceAgain == 4) {
+                        System.out.println("Enter the name of the section");
+                        String sectionName = scanner.nextLine();
+                        jdbcstuff.displayTeachersOfSection(sectionName);
+                    }
+                    if (choiceAgain == 5) {
+                        jdbcstuff.displayCourselessTeachers();
+                    }
+                    if (choiceAgain == 6) {
+                        jdbcstuff.displayTeachersTeachingMultipleSections();
+                    }
+                    if (choiceAgain == 0) {
+                        break;
+                    }
 
+                }
             }
         }
-        }
     }
+
     private static void AdminControls() {
         System.out.println("Logged in Successfully \n");
         System.out.println("Welcome Admin");
@@ -455,98 +552,185 @@ public class Main {
                 }
             }
             if (choice == 1) {
-                while(true){
-                EntityCreationOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    EntityCreationOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                         while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            StudentCreator();
+                            System.out.println("If you want to add more students enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if (stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 2) {
+                         while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            TeacherCreator();
+                            System.out.println("If you want to add more teachers enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if(stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 3) {
+                         while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            CourseCreator();
+                            System.out.println("If you want to add more courses enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                }
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } if (stuff.equalsIgnoreCase("y")){
+
+                            }
+
+                        }
+                    }
+                    if (choiceAgain == 4) {
+                          while (true) {
+                            collegeSystem.saveData();
+                            String stuff;
+                            SectionCreator();
+                            System.out.println("If you want to add more sections enter y, else n");
+                            stuff = scanner.nextLine();
+                             while(true){
+                                if(stuff.equalsIgnoreCase("n")){
+                                    break;
+                                }
+                                if(stuff.equalsIgnoreCase("y")){
+                                    break;
+                                    
+                                }
+
+                                System.out.println("Not what i was expecting, try again ");
+                                stuff = scanner.nextLine();
+                            }
+                            if (stuff.equalsIgnoreCase("n")) {
+                                break;
+                            } else if (stuff.equalsIgnoreCase("y")){
+
+                            }
+                        }
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentCreator();
-                }
-                if (choiceAgain == 2) {
-                    TeacherCreator();
-                }
-                if (choiceAgain == 3) {
-                    CourseCreator();
-                }
-                if (choiceAgain == 4) {
-                    SectionCreator();
-                }
-                if (choiceAgain == 0) {
-                    break;
-                }
-            }
             }
             if (choice == 2) {
-                while(true){
-                EntityAssignmentOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    EntityAssignmentOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StudentCourse();
+                    }
+                    if (choiceAgain == 2) {
+                        TeacherCourse();
+                    }
+                    if (choiceAgain == 3) {
+                        TeacherSection();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
+
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentCourse();
-                }
-                if (choiceAgain == 2) {
-                    TeacherCourse();
-                }
-                if (choiceAgain == 3) {
-                    TeacherSection();
-                }
-                if (choiceAgain == 0) {
-                    break;
-                    
-                }
-            }
             }
             if (choice == 3) {
-                while(true){
-                EntityDisplayOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    EntityDisplayOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StudentDisplay();
+                    }
+                    if (choiceAgain == 2) {
+                        TeacherDisplay();
+                    }
+                    if (choiceAgain == 3) {
+                        CourseDisplay();
+                    }
+                    if (choiceAgain == 4) {
+                        SectionDisplay();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    StudentDisplay();
-                }
-                if (choiceAgain == 2) {
-                    TeacherDisplay();
-                }
-                if (choiceAgain == 3) {
-                    CourseDisplay();
-                }
-                if (choiceAgain == 4) {
-                    SectionDisplay();
-                }
-                if(choiceAgain == 0){
-                    break;
-                }
-            }
             }
             if (choice == 5) {
                 System.out.println("Logging out");
@@ -554,50 +738,50 @@ public class Main {
                 return;
             }
             if (choice == 4) {
-                while(true){
-                AdditionalOptions();
-                int choiceAgain = -1;
                 while (true) {
-                    System.out.print("Enter your choice: ");
-                    try {
-                        choiceAgain = scanner.nextInt();
-                        scanner.nextLine();
+                    AdditionalOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        System.out.print("Enter the name of the section: ");
+                        String sectionName = scanner.nextLine();
+                        jdbcstuff.displayStudentsOfSection(sectionName);
+                    }
+                    if (choiceAgain == 2) {
+                        System.out.print("Enter the name of the course: ");
+                        String courseName = scanner.nextLine();
+                        jdbcstuff.displayTeachersOfCourse(courseName);
+                    }
+                    if (choiceAgain == 3) {
+                        System.out.print("Enter the name of the student: ");
+                        String studentName = scanner.nextLine();
+                        jdbcstuff.displayCoursesOfStudent(studentName);
+                    }
+                    if (choiceAgain == 4) {
+                        System.out.println("Enter the name of the section");
+                        String sectionName = scanner.nextLine();
+                        jdbcstuff.displayTeachersOfSection(sectionName);
+                    }
+                    if (choiceAgain == 5) {
+                        jdbcstuff.displayCourselessTeachers();
+                    }
+                    if (choiceAgain == 6) {
+                        jdbcstuff.displayTeachersTeachingMultipleSections();
+                    }
+                    if (choiceAgain == 0) {
                         break;
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a valid integer \n");
-                        scanner.nextLine();
                     }
                 }
-                if (choiceAgain == 1) {
-                    System.out.print("Enter the name of the section: ");
-                    String sectionName = scanner.nextLine();
-                    jdbcstuff.displayStudentsOfSection(sectionName);
-                }
-                if (choiceAgain == 2) {
-                    System.out.print("Enter the name of the course: ");
-                    String courseName = scanner.nextLine();
-                    jdbcstuff.displayTeachersOfCourse(courseName);
-                }
-                if (choiceAgain == 3) {
-                    System.out.print("Enter the name of the student: ");
-                    String studentName = scanner.nextLine();
-                    jdbcstuff.displayCoursesOfStudent(studentName);
-                }
-                if (choiceAgain == 4) {
-                    System.out.println("Enter the name of the section");
-                    String sectionName = scanner.nextLine();
-                    jdbcstuff.displayTeachersOfSection(sectionName);
-                }
-                if (choiceAgain == 5) {
-                    jdbcstuff.displayCourselessTeachers();
-                }
-                if (choiceAgain == 6) {
-                    jdbcstuff.displayTeachersTeachingMultipleSections();
-                }
-                if(choiceAgain == 0){
-                    break;
-                }
-            }
 
             }
         }
@@ -943,6 +1127,8 @@ public class Main {
     }
 
     private static void TeacherStalker() {
+        TeacherDisplayAgain();
+        System.out.println();
         boolean finder = false;
         System.out.print("Enter the rollNo of the teacher whose information you want: ");
         String teacherToSearch = scanner.nextLine();
@@ -956,6 +1142,7 @@ public class Main {
                 System.out.println("PhoneNo" + teacherAgain.getPhoneNo());
                 System.out.println("EmailAddress" + teacherAgain.getEmailID());
                 System.out.println("DateOfBirth" + teacherAgain.getDOB());
+                System.out.println("Password: " + teacherAgain.getPassword());
                 return;
             }
         }
@@ -965,6 +1152,8 @@ public class Main {
     }
 
     private static void StudentStalker() {
+        StudentDisplayAgain();
+        System.out.println();
         boolean finder = false;
         System.out.print("Enter the rollNo of the student whose information you want: ");
         String studentToSearch = scanner.nextLine();
@@ -978,6 +1167,7 @@ public class Main {
                 System.out.println("PhoneNo" + studentAgain.getPhoneNo());
                 System.out.println("EmailAddress" + studentAgain.getEmailID());
                 System.out.println("DateOfBirth" + studentAgain.getDOB());
+                System.out.println("Password: " + studentAgain.getPassword());
             }
         }
         if (finder = false) {
@@ -1005,6 +1195,7 @@ public class Main {
             }
         }
         Student student = new Student(studentName);
+        int counter = 0;
         System.out.print("Enter student section: ");
         while (true) {
             String Section = scanner.nextLine();
@@ -1015,6 +1206,11 @@ public class Main {
                 break;
             } else {
                 System.out.println("Section not found, Enter Section again");
+                counter++;
+            }
+            if (counter > 3) {
+                System.out.println("Student Creation Failed");
+                return;
             }
         }
         collegeSystem.addStudent(student);
@@ -1092,20 +1288,49 @@ public class Main {
     private static void StudentCourse() {
         StudentDisplayAgain();
         System.out.println("");
-        System.out.print("Enter student roll number: "); // also make display all the students stuff may help here
+        System.out.print("Enter student roll number: ");
         String studentRollNo = scanner.nextLine();
-        System.out.print("Enter course name: ");
-        String courseNameToEnroll = scanner.nextLine();
-        Student studentToEnroll = getStudentByRollNo(collegeSystem, studentRollNo);
-        Course courseToEnroll = getCourseByName(courseNameToEnroll);
+        String stuff;
+        int counter = 0;
+        ;
+        while (true) {
+            collegeSystem.saveData();
+            System.out.print("Enter course name: ");
+            String courseNameToEnroll = scanner.nextLine();
+            Student studentToEnroll = getStudentByRollNo(collegeSystem, studentRollNo);
+            Course courseToEnroll = getCourseByName(courseNameToEnroll);
 
-        if (studentToEnroll != null && courseToEnroll != null) {
-            studentToEnroll.enrollInCourse(courseToEnroll);
-            System.out.println("\n Student enrolled in the course successfully!");
-        } else {
-            System.out.println("\n Student or course not found. Please check the inputs.");
+            if (studentToEnroll != null && courseToEnroll != null) {
+                studentToEnroll.enrollInCourse(courseToEnroll);
+                System.out.println("\n Student enrolled in the course successfully!");
+            } else {
+                System.out.println("\n Student or course not found. Please check the inputs.");
+                counter++;
+            }
+            if (counter > 3) {
+                System.out.println("Course assignment failed");
+                break;
+            }
+
+            jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll);
+            System.out.println("if you want to assign more courses enter y, else n");
+            stuff = scanner.nextLine();
+            while (true) {
+                if(stuff.equalsIgnoreCase("y")){
+                    break;
+                }
+                if(stuff.equalsIgnoreCase("n")){
+                    break;
+                }
+                System.out.println("Not what i was expecting, try again ");
+                stuff = scanner.nextLine();
+            }
+            if (stuff.equalsIgnoreCase("n")) {
+                break;
+            } if (stuff.equalsIgnoreCase("y")){
+
+            }
         }
-        jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll);
     }
 
     private static void TeacherCourse() {
@@ -1113,19 +1338,46 @@ public class Main {
         System.out.println();
         System.out.print("Enter teacher roll number: ");
         String teacherRollNoToAssign = scanner.nextLine();
-        System.out.print("Enter course name: ");
-        String courseNameToAssign = scanner.nextLine();
+        String stuff;
+        int counter = 0;
+        while (true) {
+            collegeSystem.saveData();
+            System.out.print("Enter course name: ");
+            String courseNameToAssign = scanner.nextLine();
 
-        Teacher teacherToAssign = getTeacherByRollNo(teacherRollNoToAssign);
-        Course courseToAssign = getCourseByName(courseNameToAssign);
+            Teacher teacherToAssign = getTeacherByRollNo(teacherRollNoToAssign);
+            Course courseToAssign = getCourseByName(courseNameToAssign);
 
-        if (teacherToAssign != null && courseToAssign != null) {
-            teacherToAssign.assignToCourse(courseToAssign);
-            System.out.println("\n Teacher assigned to the course successfully!");
-        } else {
-            System.out.println("\n Teacher or course not found. Please check the inputs.");
+            if (teacherToAssign != null && courseToAssign != null) {
+                teacherToAssign.assignToCourse(courseToAssign);
+                System.out.println("\n Teacher assigned to the course successfully!");
+            } else {
+                System.out.println("\n Teacher or course not found. Please check the inputs.");
+                counter++;
+            }
+            if (counter > 3) {
+                System.out.println("Course assignemnt failed");
+                break;
+            }
+            jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign);
+            System.out.println("if you want to assign more courses enter y, else n");
+            stuff = scanner.nextLine();
+            while (true) {
+                if(stuff.equalsIgnoreCase("n")){
+                    break;
+                }
+                if(stuff.equalsIgnoreCase("y")){
+                    break;
+                }
+                System.out.println("Not what i was expecting, try again ");
+                stuff = scanner.nextLine();
+            }
+            if (stuff.equalsIgnoreCase("n")) {
+                break;
+            } if (stuff.equalsIgnoreCase("y")){
+
+            }
         }
-        jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign);
     }
 
     private static void TeacherSection() {
@@ -1133,19 +1385,46 @@ public class Main {
         System.out.println();
         System.out.println("Enter Teacher RollNo");
         String teacherRollNoToAssignToSection = scanner.nextLine();
-        System.out.println("Enter Section Name");
-        String sectionNameToAssign = scanner.nextLine();
+        String stuff;
+        int counter = 0;
+        while (true) {
+            collegeSystem.saveData();
+            System.out.println("Enter Section Name");
+            String sectionNameToAssign = scanner.nextLine();
 
-        Teacher teachertoAssign = getTeacherByRollNo(teacherRollNoToAssignToSection);
-        Section sectionToAssign = getSectionByName(sectionNameToAssign);
+            Teacher teachertoAssign = getTeacherByRollNo(teacherRollNoToAssignToSection);
+            Section sectionToAssign = getSectionByName(sectionNameToAssign);
 
-        if (teachertoAssign != null && sectionToAssign != null) {
-            teachertoAssign.assignToSection(sectionToAssign);
-            System.out.println("\n Teacher assigned to the section successfully");
-        } else {
-            System.out.println("\n Teacher or Section not found, Please check the inputs are try again later");
+            if (teachertoAssign != null && sectionToAssign != null) {
+                teachertoAssign.assignToSection(sectionToAssign);
+                System.out.println("\n Teacher assigned to the section successfully");
+            } else {
+                System.out.println("\n Teacher or Section not found, Please check the inputs are try again later");
+                counter++;
+            }
+            if (counter > 3) {
+                System.out.println("Section assignment failed");
+                break;
+            }
+            jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign);
+            System.out.println("if you want to assign more sections enter y, else n");
+            stuff = scanner.nextLine();
+            while (true) {
+                if(stuff.equalsIgnoreCase("n")){
+                    break;
+                }
+                if(stuff.equalsIgnoreCase("y")){
+                    break;
+                }
+                System.out.println("Not what i was expecting, try again ");
+                stuff = scanner.nextLine();
+            }
+            if (stuff.equalsIgnoreCase("n")) {
+                break;
+            } if (stuff.equalsIgnoreCase("y")){
+                
+            }
         }
-        jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign);
     }
 
     private static void StudentDisplay() {
@@ -1158,7 +1437,6 @@ public class Main {
         }
     }
 
-    
     private static void StudentDisplayAgain() {
         System.out.println("List of Students:");
         pavan_dynamic_array students = collegeSystem.getStudents();
@@ -1170,19 +1448,17 @@ public class Main {
         }
     }
 
-
     private static void TeacherDisplay() {
         System.out.println("List of Teachers:");
         pavan_dynamic_array teachers = collegeSystem.getTeachers();
         for (int i = 0; i < teachers.size(); i++) {
             Teacher Teacher = (Teacher) teachers.get(i);
             Teacher.displayTeacherInfo();
-            System.out.println("No. Assigned Courses: " + Teacher.getCourses().size());
             System.out.println();
         }
     }
 
-     private static void TeacherDisplayAgain() {
+    private static void TeacherDisplayAgain() {
         System.out.println("List of Teachers:");
         pavan_dynamic_array teachers = collegeSystem.getTeachers();
         for (int i = 0; i < teachers.size(); i++) {
@@ -1191,6 +1467,7 @@ public class Main {
             System.out.println("RollNo: " + Teacher.getRollNo());
         }
     }
+
     private static void CourseDisplay() {
         pavan_dynamic_array courses = collegeSystem.getCourses();
         for (int i = 0; i < courses.size(); i++) {

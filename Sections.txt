@@ -1,0 +1,21 @@
+Sections:
+Name: CSE1
+Teachers Teaching: Harsh Sharma, Atul Mishra, Meera Singh, Lelouch Lamperouge, Rem, 
+Students in Section: Nikhil Kumar Tomar, 
+
+Name: CSE2
+Teachers Teaching: Harsh Sharma, Kiran Khattar, Kiran Sharma, Nishtha Phutela, Rohit Verma, Lelouch Lamperouge, Erza Scarlet, Hiei, 
+Students in Section: Pavan Kalvakota, Raghav Malik, ShreyaXRaghav, 
+
+Name: CSE3
+Teachers Teaching: Harsh Sharma, Manisha Saini, Yogesh Gupta, Nishtha Phutela, Nandita Choudary, Rohit Verma, Lelouch Lamperouge, Kakashi Hatake, Bulma Briefs, 
+Students in Section: Guneet Chawla, Sanskar Gupta, Manav Sharma, 
+
+Name: CSE4
+Teachers Teaching: Kiran Khattar, Manisha Saini, Anil Kapoor, Meera Singh, Erza Scarlet, Kakashi Hatake, 
+Students in Section: Anjali Mehta, Lakkshya Gupta, Vishwajeet Tripati, 
+
+Name: CSE5
+Teachers Teaching: Manisha Saini, Yogesh Gupta, Anil Kapoor, Kakashi Hatake, Bulma Briefs, 
+Students in Section: 
+
