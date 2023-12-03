@@ -1,7 +1,5 @@
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -32,40 +30,6 @@ public class ManagementSystem implements Serializable {
         admins = new pavan_dynamic_array(1);
     }
 
-    public Object authenticateUser(UserRole role, String username, String password) {
-        switch (role) {
-            case CREATOR:
-                if (username.equals("Pavan") && password.equals("%Fortress123&")) {
-                    return "Creator";
-                }
-                break;
-
-            case ADMIN:
-                Admin authenticatedAdmin = authenticateAdmin(username, password);
-                if (authenticatedAdmin != null) {
-                    return authenticatedAdmin;
-                }
-                break;
-            case TEACHER:
-                Teacher authenticatedTeacher = authenticateTeacher(username, password);
-                if (authenticatedTeacher != null) {
-                    return authenticatedTeacher;
-                }
-                break;
-
-            case STUDENT:
-                Student authenticatedStudent = authenticateStudent(username, password);
-                if (authenticatedStudent != null) {
-                    return authenticatedStudent;
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        return null;
-    }
 
     public void saveData() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.ser"))) {
@@ -92,7 +56,14 @@ public class ManagementSystem implements Serializable {
             System.err.println("Error loading data: " + e.getMessage());
         }
     }
-
+    public void FileStateDeleter(String filename) {
+        try (FileOutputStream writer = new FileOutputStream(filename)) {
+            writer.write(("").getBytes());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void saveStateToFile(String filename, Class<?> clazz) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             if (clazz.equals(Student.class)) {
@@ -241,7 +212,7 @@ public class ManagementSystem implements Serializable {
                 return admin;
             }
         }
-        return null; 
+        return null;
     }
 
     public void addStudent(Student student) {
@@ -260,11 +231,11 @@ public class ManagementSystem implements Serializable {
         sections.add(section);
     }
 
-    public void addAdmin(Admin admin){
+    public void addAdmin(Admin admin) {
         admins.add(admin);
     }
 
-    public pavan_dynamic_array getAdmins(){
+    public pavan_dynamic_array getAdmins() {
         return admins;
     }
 
@@ -335,7 +306,7 @@ public class ManagementSystem implements Serializable {
                 return section;
             }
         }
-        return null; 
+        return null;
     }
 
     public Course getCourseByName(String courseName) {

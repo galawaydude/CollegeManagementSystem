@@ -1,0 +1,568 @@
+private static void insertUser(String username, String password, String role) {
+    try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+        String sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setString(3, role);
+            statement.executeUpdate();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+
+
+
+
+
+________________________________________________________________________________________________
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the students table
+    public static void insertStudent(String name, String rollNo) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertStudentQuery = "INSERT INTO students (name, rollNo) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertStudentQuery)) {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, rollNo);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+    // Function to insert data into the users table
+    public static void insertUser(String username, String password, String role) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertUserQuery = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertUserQuery)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                preparedStatement.setString(3, role);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the teachers table
+    public static void insertTeacher(String name, String rollNo) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertTeacherQuery = "INSERT INTO teachers (name, rollNo) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertTeacherQuery)) {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, rollNo);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+    // Function to insert data into the users table
+    public static void insertUser(String username, String password, String role) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertUserQuery = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertUserQuery)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, password);
+                preparedStatement.setString(3, role);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+________________________________________________________________________________________________
+
+private static void TeacherCreator() {
+    // ... (your existing code)
+
+    // Insert data into the teachers table
+    insertTeacher(teacherName, teacherRollNo);
+
+    // Insert data into the users table
+    insertUser(teacherRollNo, "defaultPassword", "teacher");
+
+    // ... (your existing code)
+}
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the courses table
+    public static void insertCourse(String courseName) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertCourseQuery = "INSERT INTO courses (name) VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertCourseQuery)) {
+                preparedStatement.setString(1, courseName);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+    // Function to insert data into the teacher_courses table
+    public static void insertTeacherToCourse(String teacherName, String courseName) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertTeacherToCourseQuery =
+                    "INSERT INTO teacher_courses (teacher_id, course_id) VALUES ((SELECT id FROM teachers WHERE name = ?), (SELECT id FROM courses WHERE name = ?))";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertTeacherToCourseQuery)) {
+                preparedStatement.setString(1, teacherName);
+                preparedStatement.setString(2, courseName);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the courses table
+    public static void insertCourse(String courseName) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertCourseQuery = "INSERT INTO courses (name) VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertCourseQuery)) {
+                preparedStatement.setString(1, courseName);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+
+    // Function to insert data into the teacher_courses table
+    public static void insertTeacherToCourse(String teacherName, String courseName) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertTeacherToCourseQuery =
+                    "INSERT INTO teacher_courses (teacher_id, course_id) VALUES ((SELECT id FROM teachers WHERE name = ?), (SELECT id FROM courses WHERE name = ?))";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertTeacherToCourseQuery)) {
+                preparedStatement.setString(1, teacherName);
+                preparedStatement.setString(2, courseName);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the sections table
+    public static void insertSection(String sectionName) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String insertSectionQuery = "INSERT INTO sections (name) VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertSectionQuery)) {
+                preparedStatement.setString(1, sectionName);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the student_courses table
+    public static void enrollStudentInCourse(int studentId, int courseId) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String enrollStudentQuery = "INSERT INTO student_courses (student_id, course_id) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(enrollStudentQuery)) {
+                preparedStatement.setInt(1, studentId);
+                preparedStatement.setInt(2, courseId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+private static void StudentCourse() {
+    System.out.print("Enter student roll number: ");
+    String studentRollNo = scanner.nextLine();
+    System.out.print("Enter course name: ");
+    String courseNameToEnroll = scanner.nextLine();
+
+    // Fetch student and course details (you'll need to get their corresponding IDs)
+    Student studentToEnroll = getStudentByRollNo(collegeSystem, studentRollNo);
+    Course courseToEnroll = getCourseByName(collegeSystem, courseNameToEnroll);
+
+    if (studentToEnroll != null && courseToEnroll != null) {
+        // Enroll student in course by inserting data into the student_courses table
+        enrollStudentInCourse(studentToEnroll.getId(), courseToEnroll.getId());
+        System.out.println("\n Student enrolled in the course successfully!");
+    } else {
+        System.out.println("\n Student or course not found. Please check the inputs.");
+    }
+}
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to insert data into the teacher_sections table
+    public static void assignTeacherToSection(int teacherId, int sectionId) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String assignTeacherQuery = "INSERT INTO teacher_sections (teacher_id, section_id) VALUES (?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(assignTeacherQuery)) {
+                preparedStatement.setInt(1, teacherId);
+                preparedStatement.setInt(2, sectionId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+private static void TeacherSection() {
+    System.out.println("Enter Teacher Name");
+    String teacherNameToAssignToSection = scanner.nextLine();
+    System.out.println("Enter Section Name");
+    String sectionNameToAssign = scanner.nextLine();
+
+    // Fetch teacher and section details (you'll need to get their corresponding IDs)
+    Teacher teacherToAssign = getTeacherByName(collegeSystem, teacherNameToAssignToSection);
+    Section sectionToAssign = getSectionByName(collegeSystem, sectionNameToAssign);
+
+    if (teacherToAssign != null && sectionToAssign != null) {
+        // Assign teacher to section by inserting data into the teacher_sections table
+        assignTeacherToSection(teacherToAssign.getId(), sectionToAssign.getId());
+        System.out.println("\n Teacher assigned to the section successfully");
+    } else {
+        System.out.println("\n Teacher or Section not found, Please check the inputs are try again later");
+    }
+}
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to update teacher information in the teacher table
+    public static void updateTeacherInfo(int teacherId, String columnName, String newValue) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String updateTeacherQuery = "UPDATE teacher SET " + columnName + " = ? WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateTeacherQuery)) {
+                preparedStatement.setString(1, newValue);
+                preparedStatement.setInt(2, teacherId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+private static void TeacherStuff(int teacherChoice, Teacher teacher) {
+    // Fetch teacher ID
+    int teacherId = teacher.getId();
+
+    if (teacherChoice == 1) {
+        System.out.println("You have opted to set your name");
+        System.out.print("Enter the new name: ");
+        String newName = scanner.nextLine();
+        // Update teacher name in the teacher table
+        updateTeacherInfo(teacherId, "name", newName);
+        teacher.setName(newName);
+    }
+    // Repeat similar blocks for other information updates (email, phoneNo, DateOfBirth)
+    // ...
+    return;
+}
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class DatabaseHandler {
+
+    private static final String DB_URL = "jdbc:postgresql://your_database_url";
+    private static final String USER = "your_database_user";
+    private static final String PASSWORD = "your_database_password";
+
+    // Function to update student information in the students table
+    public static void updateStudentInfo(int studentId, String columnName, String newValue) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String updateStudentQuery = "UPDATE students SET " + columnName + " = ? WHERE id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(updateStudentQuery)) {
+                preparedStatement.setString(1, newValue);
+                preparedStatement.setInt(2, studentId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+    }
+}
+
+
+
+
+
+private static void StudentStuff(int studentChoice, Student student) {
+    // Fetch student ID
+    int studentId = student.getId();
+
+    if (studentChoice == 1) {
+        System.out.println("You have opted to set your name");
+        System.out.print("Enter the new name: ");
+        String newName = scanner.nextLine();
+        // Update student name in the students table
+        updateStudentInfo(studentId, "name", newName);
+        student.setName(newName);
+    }
+    // Repeat similar blocks for other information updates (email, phoneNo, DateOfBirth)
+    // ...
+    return;
+}
+
+
+these are all the queries you can do
+1) SELECT * FROM Student WHERE section = 'YourSectionName';
+
+2)  SELECT Teacher.* FROM Teacher
+    JOIN teacher_courses ON Teacher.id = teacher_courses.teacher_id
+    JOIN courses ON teacher_courses.course_id = courses.id
+    WHERE courses.name = 'YourCourseName';
+
+3)  SELECT Course.* FROM Course
+    JOIN student_courses ON Course.id = student_courses.course_id
+    JOIN Student ON student_courses.student_id = Student.id
+    WHERE Student.rollNo = 'YourStudentRollNo';
+
+4)  SELECT Section.* FROM Section
+    JOIN teacher_sections ON Section.id = teacher_sections.section_id
+    JOIN Teacher ON teacher_sections.teacher_id = Teacher.id
+    WHERE Teacher.rollNo = 'YourTeacherRollNo';
+
+5)  SELECT * FROM users WHERE role = 'YourRole';
+
+6)  SELECT Teacher.* FROM Teacher
+    JOIN teacher_sections ON Teacher.id = teacher_sections.teacher_id
+    JOIN Section ON teacher_sections.section_id = Section.id
+    WHERE Section.name = 'YourSectionName';
+
+7)  SELECT Student.* FROM Student
+    JOIN student_courses ON Student.id = student_courses.student_id
+    JOIN Course ON student_courses.course_id = Course.id
+    WHERE Course.name = 'YourCourseName';
+
+8)  SELECT Course.* FROM Course
+    JOIN teacher_courses ON Course.id = teacher_courses.course_id
+    JOIN Teacher ON teacher_courses.teacher_id = Teacher.id
+    WHERE Teacher.rollNo = 'YourTeacherRollNo';
+
+
+9) SELECT * FROM Student
+    WHERE id NOT IN (SELECT student_id FROM student_courses);
+
+
+
+
+The code for Some queries
+
+public static void getStudentsInSection(Connection connection, String sectionName) throws SQLException {
+    String query = "SELECT * FROM Student WHERE section = ?";
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setString(1, sectionName);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                // Process each row of the result set
+                System.out.println("Student Name: " + resultSet.getString("name"));
+                // Add more fields as needed
+            }
+        }
+    }
+}
+
+
+public static void getTeachersByCourse(Connection connection, String courseName) throws SQLException {
+    String query = "SELECT Teacher.* FROM Teacher " +
+                   "JOIN teacher_courses ON Teacher.id = teacher_courses.teacher_id " +
+                   "JOIN courses ON teacher_courses.course_id = courses.id " +
+                   "WHERE courses.name = ?";
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setString(1, courseName);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                // Process each row of the result set
+                System.out.println("Teacher Name: " + resultSet.getString("name"));
+                // Add more fields as needed
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+Table queries
+
+
+CREATE TABLE Student (
+    id SERIAL,
+    name VARCHAR(255),
+    rollNo VARCHAR(50) PRIMARY KEY,
+    section VARCHAR(50),
+    emailAddress VARCHAR(255),
+    phoneNo VARCHAR(20),
+    dateOfBirth VARCHAR(15)
+);
+
+CREATE TABLE Teacher (
+    id SERIAL ,
+    name VARCHAR(255),
+    rollNo VARCHAR(50) PRIMARY KEY,
+    emailAddress VARCHAR(255),
+    phoneNo VARCHAR(20),
+    dateOfBirth VARCHAR(15)
+);
+CREATE TABLE users (
+    id SERIAL,
+    username VARCHAR(50) PRIMARY KEY NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role VARCHAR(20) NOT NULL
+);
+CREATE TABLE Section (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE Course (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE
+);
+
+
+CREATE TABLE teacher_sections (
+    id SERIAL PRIMARY KEY,
+    teacher_rollNo VARCHAR(50) REFERENCES teacher(rollNo),
+    section_id INT REFERENCES section(id)
+);
+
+CREATE TABLE student_courses (
+    id SERIAL PRIMARY KEY,
+    student_rollNo VARCHAR(50) REFERENCES student(rollNo),
+    course_id INT REFERENCES course(id)
+);
+
+CREATE TABLE TeacherCourses (
+    id SERIAL PRIMARY KEY,
+    teacher_rollNo VARCHAR(50) REFERENCES teacher(rollNo),
+    course_id INT REFERENCES course(id)
+);
+

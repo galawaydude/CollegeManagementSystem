@@ -84,6 +84,7 @@ public class Teacher implements Serializable{
 
     private String generateEmailId(){
         String emailid = this.name + "@bmu.edu.in";
+        emailid = emailid.replaceAll("\\s", "");
         return emailid;
     }
     public void displayTeacherInfo() {
@@ -93,6 +94,11 @@ public class Teacher implements Serializable{
         for (int i = 0; i < sections.size(); i++) {
             Section section = (Section) sections.get(i);
             System.out.println(section.getName());
+        }
+        System.out.println("Course enrolled in ");
+        for(int i = 0; i < sections.size(); i++){
+            Course course = (Course) courses.get(i);
+            System.out.println(course.getName());
         }
     }
 }

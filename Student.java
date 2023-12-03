@@ -5,7 +5,7 @@ public class Student  implements Serializable {
     private String name;
     private String rollNo;
     private String section;
-    private String EmailAddress = "";
+    private String EmailAddress = ""; // this is not being printed properly
     private String PhoneNo = "";
     private String DateOfBirth = "";
     private String Password;
@@ -80,9 +80,9 @@ public class Student  implements Serializable {
 
     private String generateEmailId(){
         String emailid = this.name + "@bmu.edu.in";
+        emailid = emailid.replaceAll("\\s", "");
         return emailid;
     }
-
     public void displayStudentInfo() {
         System.out.println("Student Name: " + name);
         System.out.println("Roll Number: " + rollNo);

@@ -34,7 +34,6 @@ public class pavan_dynamic_array implements Serializable {
             size--;
         }
     }
-
     public int indexOf(Object element) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(element)) {
