@@ -30,20 +30,26 @@ CREATE TABLE Course (
 );
 
 CREATE TABLE Teacher_Section (
-    id SERIAL PRIMARY KEY,
+    id SERIAL UNIQUE,
     teacher_rollNo VARCHAR(50) REFERENCES Teacher(rollNo),
-    section_name VARCHAR(50) REFERENCES Section(name)
+    section_name VARCHAR(50) REFERENCES Section(name),
+    PRIMARY KEY (teacher_rollNo, section_name)
 );
+
 
 CREATE TABLE Student_Course (
-    id SERIAL PRIMARY KEY,
+    id SERIAL UNIQUE,
     student_rollNo VARCHAR(50) REFERENCES Student(rollNo),
-    course_name VARCHAR(50) REFERENCES Course(name)
+    course_name VARCHAR(50) REFERENCES Course(name),
+    PRIMARY KEY (student_rollNo, course_name)
 );
 
+
 CREATE TABLE Teacher_Course (
-    id SERIAL PRIMARY KEY,
+    id SERIAL UNIQUE
     teacher_rollNo VARCHAR(50) REFERENCES Teacher(rollNo),
-    course_name VARCHAR(50) REFERENCES Course(name)
+    course_name VARCHAR(50) REFERENCES Course(name),
+    PRIMARY KEY (teacher_rollNo, course_name)
 );
+
 

@@ -201,7 +201,7 @@ public class jdbcStuff {
             e.printStackTrace();
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Student was assigned a section" + "TeacherRollNo: " + RollNo + "Section: " + SectionName);
+            writer.write("Teacher was assigned a section" + "TeacherRollNo: " + RollNo + "Section: " + SectionName);
             writer.newLine();
         } catch (IOException e) {
             System.out.println("Writing info failed");
@@ -428,4 +428,79 @@ public class jdbcStuff {
             e.printStackTrace();
         }
     }
+
+    public void deleteStudent(String rollNo) {
+        String stuffToExecute = "DELETE FROM Student WHERE rollNo = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(stuffToExecute);
+            pst.setString(1, rollNo);
+            pst.executeUpdate();
+            System.out.println("Student with Roll No " + rollNo + " deleted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.write("Students updated" + "StudentRollNo: " + rollNo + "Was removed");
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Writing info failed");
+        }
+    }
+
+    public void deleteTeacher(String rollNo) {
+        String stuffToExecute = "DELETE FROM Teacher WHERE rollNo = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(stuffToExecute);
+            pst.setString(1, rollNo);
+            pst.executeUpdate();
+            System.out.println("Teacher with Roll No " + rollNo + " deleted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.write("Teachers updated" + "TeacherRollNo: " + rollNo + "Was removed");
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Writing info failed");
+        }
+    }
+
+    public void deleteSection(String name) {
+        String stuffToExecute = "DELETE FROM Section WHERE name = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(stuffToExecute);
+            pst.setString(1, name);
+            pst.executeUpdate();
+            System.out.println("Section with Name " + name + " deleted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.write("Sections updated " + "Section: " + name + " Was removed");
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Writing info failed");
+        }
+    }
+
+        public void deleteCourse(String name) {
+        String stuffToExecute = "DELETE FROM Course WHERE name = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(stuffToExecute);
+            pst.setString(1, name);
+            pst.executeUpdate();
+            System.out.println("Course with Name " + name + " deleted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+          try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.write("Courses updated " + "Course: " + name + " Was removed");
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Writing info failed");
+        }
+        
+    }
+
+
 }

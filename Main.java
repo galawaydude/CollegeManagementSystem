@@ -12,7 +12,7 @@ public class Main {
         while (true) {
             LoginMenu();
             int choice = -1;
-             while (true) {
+            while (true) {
                 System.out.print("Enter your choice: ");
                 try {
                     choice = scanner.nextInt();
@@ -138,8 +138,9 @@ public class Main {
         System.out.println("1. Entity Creation Options");
         System.out.println("2. Entity Assignment Options");
         System.out.println("3. Entity Display Options");
-        System.out.println("4. Additional Options");
-        System.out.println("5. Logout");
+        System.out.println("4. Entity Deletion Options");
+        System.out.println("5. Additional Options");
+        System.out.println("6. Logout");
 
         collegeSystem.saveData();
     }
@@ -231,6 +232,18 @@ public class Main {
         System.out.println(" 0. Previous Page");
     }
 
+    private static void EntityDeletionOptions() {
+        System.out.println("Entity Deletion Options");
+        System.out.println("_______________________");
+        System.out.println();
+        System.out.println("1. Delete Student");
+        System.out.println("2. Delete Teacher");
+        System.out.println("3. Delete Section");
+        System.out.println("4. Delete Course");
+        System.out.println("0. Previous Page");
+
+    }
+
     private static void AdditionalOptions() {
         System.out.println("Additional Options(for advanced query operations)");
         System.out.println("_________________________________________________");
@@ -300,7 +313,6 @@ public class Main {
             }
             if (choice == 1) {
                 while (true) {
-                    
                     EntityCreationOptions();
                     int choiceAgain = -1;
                     while (true) {
@@ -321,11 +333,11 @@ public class Main {
                             StudentCreator();
                             System.out.println("If you want to add more students enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -333,7 +345,8 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if (stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
@@ -345,11 +358,11 @@ public class Main {
                             TeacherCreator();
                             System.out.println("If you want to add more teachers enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -357,7 +370,8 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if(stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
@@ -369,11 +383,11 @@ public class Main {
                             CourseCreator();
                             System.out.println("If you want to add more courses enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -381,7 +395,8 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if (stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
 
@@ -394,13 +409,13 @@ public class Main {
                             SectionCreator();
                             System.out.println("If you want to add more sections enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
-                                    
+
                                 }
 
                                 System.out.println("Not what i was expecting, try again ");
@@ -408,7 +423,7 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } else if (stuff.equalsIgnoreCase("y")){
+                            } else if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
@@ -479,11 +494,44 @@ public class Main {
                     }
                 }
             }
-            if (choice == 5) {
+            if (choice == 6) {
                 System.out.println("Logging out");
                 return;
             }
+
             if (choice == 4) {
+                while (true) {
+                    EntityDeletionOptions();
+                    int choiceAgain = -1;
+                    while (true) {
+                        System.out.print("Enter your choice: ");
+                        try {
+                            choiceAgain = scanner.nextInt();
+                            scanner.nextLine();
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter a valid integer \n");
+                            scanner.nextLine();
+                        }
+                    }
+                    if (choiceAgain == 1) {
+                        StudentDeleter();
+                    }
+                    if (choiceAgain == 2) {
+                        TeacherDeleter();
+                    }
+                    if (choiceAgain == 3) {
+                        SectionDeleter();
+                    }
+                    if(choiceAgain == 4){
+                        CourseDeleter();
+                    }
+                    if (choiceAgain == 0) {
+                        break;
+                    }
+                }
+            }
+            if (choice == 5) {
                 while (true) {
                     AdditionalOptions();
                     int choiceAgain = -1;
@@ -567,17 +615,17 @@ public class Main {
                         }
                     }
                     if (choiceAgain == 1) {
-                         while (true) {
+                        while (true) {
                             collegeSystem.saveData();
                             String stuff;
                             StudentCreator();
                             System.out.println("If you want to add more students enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -585,23 +633,24 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if (stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
                     }
                     if (choiceAgain == 2) {
-                         while (true) {
+                        while (true) {
                             collegeSystem.saveData();
                             String stuff;
                             TeacherCreator();
                             System.out.println("If you want to add more teachers enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -609,23 +658,24 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if(stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
                     }
                     if (choiceAgain == 3) {
-                         while (true) {
+                        while (true) {
                             collegeSystem.saveData();
                             String stuff;
                             CourseCreator();
                             System.out.println("If you want to add more courses enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
                                 }
                                 System.out.println("Not what i was expecting, try again ");
@@ -633,26 +683,27 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } if (stuff.equalsIgnoreCase("y")){
+                            }
+                            if (stuff.equalsIgnoreCase("y")) {
 
                             }
 
                         }
                     }
                     if (choiceAgain == 4) {
-                          while (true) {
+                        while (true) {
                             collegeSystem.saveData();
                             String stuff;
                             SectionCreator();
                             System.out.println("If you want to add more sections enter y, else n");
                             stuff = scanner.nextLine();
-                             while(true){
-                                if(stuff.equalsIgnoreCase("n")){
+                            while (true) {
+                                if (stuff.equalsIgnoreCase("n")) {
                                     break;
                                 }
-                                if(stuff.equalsIgnoreCase("y")){
+                                if (stuff.equalsIgnoreCase("y")) {
                                     break;
-                                    
+
                                 }
 
                                 System.out.println("Not what i was expecting, try again ");
@@ -660,7 +711,7 @@ public class Main {
                             }
                             if (stuff.equalsIgnoreCase("n")) {
                                 break;
-                            } else if (stuff.equalsIgnoreCase("y")){
+                            } else if (stuff.equalsIgnoreCase("y")) {
 
                             }
                         }
@@ -932,6 +983,7 @@ public class Main {
                     }
                     StudentStuff(studentChoice, student);
                 case 4:
+                    System.out.println();
                     System.out.println("This is you personal Information");
                     System.out.println("Name: " + student.getName());
                     System.out.println("RollNo: " + student.getRollNo());
@@ -1020,7 +1072,7 @@ public class Main {
         return;
     }
 
-    private static Student getStudentByRollNo(ManagementSystem collegeSystem, String rollNo) {
+    private static Student getStudentByRollNo(String rollNo) {
         pavan_dynamic_array students = collegeSystem.getStudents();
         for (int i = 0; i < students.size(); i++) {
             Student student = (Student) students.get(i);
@@ -1118,6 +1170,7 @@ public class Main {
     }
 
     private static void DisplayAdmins() {
+        System.out.println();
         System.out.println("This is a list of all the admins");
         pavan_dynamic_array AdminArray = collegeSystem.getAdmins();
         for (int i = 0; i < AdminArray.size(); i++) {
@@ -1127,6 +1180,7 @@ public class Main {
     }
 
     private static void TeacherStalker() {
+        System.out.println();
         TeacherDisplayAgain();
         System.out.println();
         boolean finder = false;
@@ -1152,6 +1206,7 @@ public class Main {
     }
 
     private static void StudentStalker() {
+        System.out.println();
         StudentDisplayAgain();
         System.out.println();
         boolean finder = false;
@@ -1292,19 +1347,23 @@ public class Main {
         String studentRollNo = scanner.nextLine();
         String stuff;
         int counter = 0;
-        ;
         while (true) {
             collegeSystem.saveData();
+            Student studentToEnroll = getStudentByRollNo(studentRollNo);
+            if (studentToEnroll == null) {
+                System.out.println("Student don't exit");
+                return;
+            }
             System.out.print("Enter course name: ");
             String courseNameToEnroll = scanner.nextLine();
-            Student studentToEnroll = getStudentByRollNo(collegeSystem, studentRollNo);
             Course courseToEnroll = getCourseByName(courseNameToEnroll);
 
-            if (studentToEnroll != null && courseToEnroll != null) {
+            if (courseToEnroll != null) {
+                jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll);
                 studentToEnroll.enrollInCourse(courseToEnroll);
                 System.out.println("\n Student enrolled in the course successfully!");
             } else {
-                System.out.println("\n Student or course not found. Please check the inputs.");
+                System.out.println("\n  course not found. Please check the inputs.");
                 counter++;
             }
             if (counter > 3) {
@@ -1312,14 +1371,13 @@ public class Main {
                 break;
             }
 
-            jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll);
             System.out.println("if you want to assign more courses enter y, else n");
             stuff = scanner.nextLine();
             while (true) {
-                if(stuff.equalsIgnoreCase("y")){
+                if (stuff.equalsIgnoreCase("y")) {
                     break;
                 }
-                if(stuff.equalsIgnoreCase("n")){
+                if (stuff.equalsIgnoreCase("n")) {
                     break;
                 }
                 System.out.println("Not what i was expecting, try again ");
@@ -1327,7 +1385,8 @@ public class Main {
             }
             if (stuff.equalsIgnoreCase("n")) {
                 break;
-            } if (stuff.equalsIgnoreCase("y")){
+            }
+            if (stuff.equalsIgnoreCase("y")) {
 
             }
         }
@@ -1342,31 +1401,35 @@ public class Main {
         int counter = 0;
         while (true) {
             collegeSystem.saveData();
+            Teacher teacherToAssign = getTeacherByRollNo(teacherRollNoToAssign);
+            if (teacherRollNoToAssign == null) {
+                System.out.println("Teacher don't exist");
+                return;
+            }
             System.out.print("Enter course name: ");
             String courseNameToAssign = scanner.nextLine();
-
-            Teacher teacherToAssign = getTeacherByRollNo(teacherRollNoToAssign);
             Course courseToAssign = getCourseByName(courseNameToAssign);
 
-            if (teacherToAssign != null && courseToAssign != null) {
+            if (courseToAssign != null) {
+                jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign);
                 teacherToAssign.assignToCourse(courseToAssign);
                 System.out.println("\n Teacher assigned to the course successfully!");
             } else {
-                System.out.println("\n Teacher or course not found. Please check the inputs.");
+                System.out.println("\n  course not found. Please check the inputs.");
                 counter++;
             }
             if (counter > 3) {
                 System.out.println("Course assignemnt failed");
                 break;
             }
-            jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign);
+
             System.out.println("if you want to assign more courses enter y, else n");
             stuff = scanner.nextLine();
             while (true) {
-                if(stuff.equalsIgnoreCase("n")){
+                if (stuff.equalsIgnoreCase("n")) {
                     break;
                 }
-                if(stuff.equalsIgnoreCase("y")){
+                if (stuff.equalsIgnoreCase("y")) {
                     break;
                 }
                 System.out.println("Not what i was expecting, try again ");
@@ -1374,7 +1437,8 @@ public class Main {
             }
             if (stuff.equalsIgnoreCase("n")) {
                 break;
-            } if (stuff.equalsIgnoreCase("y")){
+            }
+            if (stuff.equalsIgnoreCase("y")) {
 
             }
         }
@@ -1389,31 +1453,35 @@ public class Main {
         int counter = 0;
         while (true) {
             collegeSystem.saveData();
+            Teacher teachertoAssign = getTeacherByRollNo(teacherRollNoToAssignToSection);
+            if (teachertoAssign == null) {
+                System.out.println("Teacher don't exist");
+                return;
+            }
             System.out.println("Enter Section Name");
             String sectionNameToAssign = scanner.nextLine();
-
-            Teacher teachertoAssign = getTeacherByRollNo(teacherRollNoToAssignToSection);
             Section sectionToAssign = getSectionByName(sectionNameToAssign);
 
-            if (teachertoAssign != null && sectionToAssign != null) {
+            if (sectionToAssign != null) {
+                jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign);
                 teachertoAssign.assignToSection(sectionToAssign);
                 System.out.println("\n Teacher assigned to the section successfully");
             } else {
-                System.out.println("\n Teacher or Section not found, Please check the inputs are try again later");
+                System.out.println("\n Section not found, Please check the inputs are try again later");
                 counter++;
             }
             if (counter > 3) {
                 System.out.println("Section assignment failed");
                 break;
             }
-            jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign);
+
             System.out.println("if you want to assign more sections enter y, else n");
             stuff = scanner.nextLine();
             while (true) {
-                if(stuff.equalsIgnoreCase("n")){
+                if (stuff.equalsIgnoreCase("n")) {
                     break;
                 }
-                if(stuff.equalsIgnoreCase("y")){
+                if (stuff.equalsIgnoreCase("y")) {
                     break;
                 }
                 System.out.println("Not what i was expecting, try again ");
@@ -1421,8 +1489,9 @@ public class Main {
             }
             if (stuff.equalsIgnoreCase("n")) {
                 break;
-            } if (stuff.equalsIgnoreCase("y")){
-                
+            }
+            if (stuff.equalsIgnoreCase("y")) {
+
             }
         }
     }
@@ -1479,7 +1548,7 @@ public class Main {
         }
     }
 
-    private static void SectionDisplay() { // modify this function(make it better dude)
+    private static void SectionDisplay() {
         System.out.println("List of Sections:");
         pavan_dynamic_array sections = collegeSystem.getSections();
         for (int i = 0; i < sections.size(); i++) {
@@ -1489,5 +1558,59 @@ public class Main {
             System.out.println("No. Enrolled Students: " + Section.getStudents().size());
             System.out.println();
         }
+    }
+    
+    private static void StudentDeleter(){
+        StudentDisplayAgain();
+        System.out.println();
+        System.out.println("Enter the rollNo of the student you want to delete");
+        String rollNo = scanner.nextLine();
+         Student studentToDelete = getStudentByRollNo(rollNo);
+            if (studentToDelete == null) {
+                System.out.println("Student don't exist");
+                return;
+            }
+        collegeSystem.StudentDeleter(rollNo);    
+        jdbcstuff.deleteStudent(rollNo);
+    }
+      private static void TeacherDeleter(){
+        TeacherDisplayAgain();
+        System.out.println();
+        System.out.println("Enter the rollNo of the teacher you want to delete");
+        String rollNo = scanner.nextLine();
+         Teacher teacherToDelete = getTeacherByRollNo(rollNo);
+            if (teacherToDelete == null) {
+                System.out.println("Teacher don't exist");
+                return;
+            }
+        collegeSystem.TeacherDeleter(rollNo); 
+        jdbcstuff.deleteTeacher(rollNo);   
+    }
+      private static void SectionDeleter(){
+        SectionDisplay();
+        System.out.println();
+        System.out.println("Enter the Name of the Section you want to delete");
+        String Name = scanner.nextLine();
+         Section sectionToDelete = getSectionByName(Name);
+            if (sectionToDelete == null) {
+                System.out.println("Section don't exist");
+                return;
+            }
+        collegeSystem.SectionDeleter(Name);  
+        jdbcstuff.deleteSection(Name);  
+    }
+
+       private static void CourseDeleter(){
+        CourseDisplay();
+        System.out.println();
+        System.out.println("Enter the Name of the Course you want to delete");
+        String Name = scanner.nextLine();
+         Course courseToDelete = getCourseByName(Name);
+            if (courseToDelete == null) {
+                System.out.println("Course don't exist");
+                return;
+            }
+        collegeSystem.CourseDeleter(Name);
+        jdbcstuff.deleteCourse(Name);    
     }
 }

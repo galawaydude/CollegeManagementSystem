@@ -319,5 +319,50 @@ public class ManagementSystem implements Serializable {
         }
         return null;
     }
-    
+
+    public void StudentDeleter(String RollNo){
+        System.out.println("You are deleting a student");
+        for(int i = 0; i < students.size(); i++){
+            Student student = (Student) students.get(i);
+            if(student.getRollNo().equals(RollNo)){
+                students.remove(student);
+                System.out.println("Student has been successfully deleted");
+                return;
+            }
+        }
+    }
+
+    public void TeacherDeleter(String rollNo){
+        System.out.println("You are deleting a teacher");
+        for(int i = 0; i < teachers.size(); i++){
+            Teacher teacher = (Teacher) teachers.get(i);
+            if(teacher.getRollNo().equals(rollNo)){
+                teachers.remove(teacher);
+                System.out.println("Teacher has been successfully deleted");
+                return;
+            }
+        }
+    }
+
+    public void SectionDeleter(String Name){
+        System.out.println("You are deleting a section");
+        for(int i = 0; i < sections.size(); i++){
+            Section section = (Section) sections.get(i);
+            if(section.getName().equals(Name)){
+                sections.remove(section);
+                System.out.println("Section has been successfully deleted");
+                return;
+            }
+        }
+    }
+    public void CourseDeleter(String Name){
+        System.out.println("You are deleting a course");
+        for(int i = 0; i < courses.size(); i++){
+            Course course = (Course) courses.get(i);
+            if (course.getName().equals(Name)){
+                courses.remove(course);
+                System.out.println("Course has been successfully deleted");
+            }
+        }
+    }
 }
