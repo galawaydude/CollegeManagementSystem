@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 
 public class Main {
@@ -523,7 +524,7 @@ public class Main {
                     if (choiceAgain == 3) {
                         SectionDeleter();
                     }
-                    if(choiceAgain == 4){
+                    if (choiceAgain == 4) {
                         CourseDeleter();
                     }
                     if (choiceAgain == 0) {
@@ -904,6 +905,10 @@ public class Main {
                 case 5:
                     System.out.println("Password change Menu");
                     String newPassword = scanner.nextLine();
+                    while (newPassword.length() < 5) {
+                        System.out.println("too small, try again");
+                        newPassword = scanner.nextLine();
+                    }
                     teacher.setPassword(newPassword);
                     System.out.println("Password Successfully changed");
                     jdbcstuff.updateCredentials(teacher.getName(), newPassword, "password");
@@ -955,11 +960,16 @@ public class Main {
                         if (section.getName().equals(studentSection)) {
                             sectionIwant = section;
                         }
-
-                        pavan_dynamic_array teachersOfThisSection = sectionIwant.getTeachers();
-                        for (i = 0; i < teachersOfThisSection.size(); i++) {
-                            Teacher teacher = (Teacher) teachersOfThisSection.get(i);
-                            System.out.println(teacher.getName());
+                        if (sectionIwant != null) {
+                            pavan_dynamic_array teachersOfThisSection = sectionIwant.getTeachers();
+                            for (i = 0; i < teachersOfThisSection.size(); i++) {
+                                Teacher teacher = (Teacher) teachersOfThisSection.get(i);
+                                System.out.println(teacher.getName());
+                            }
+                        }
+                        if (sectionIwant == null) {
+                            System.out.println("");
+                            break;
                         }
                     }
                     break;
@@ -995,6 +1005,10 @@ public class Main {
                     System.out.println("Presently you can only change your password, deal with it later");
                     System.out.print("Enter New Password: ");
                     String newPassword = scanner.nextLine();
+                    while (newPassword.length() < 5) {
+                        System.out.println("Too small, Enter again");
+                        newPassword = scanner.nextLine();
+                    }
                     student.setPassword(newPassword);
                     System.out.println("Password Successfully changed");
                     jdbcstuff.updateCredentials(student.getName(), newPassword, "password");
@@ -1359,9 +1373,14 @@ public class Main {
             Course courseToEnroll = getCourseByName(courseNameToEnroll);
 
             if (courseToEnroll != null) {
-                jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll);
-                studentToEnroll.enrollInCourse(courseToEnroll);
-                System.out.println("\n Student enrolled in the course successfully!");
+                if (jdbcstuff.StudentCourse(studentRollNo, courseNameToEnroll)) {
+                    studentToEnroll.enrollInCourse(courseToEnroll);
+                    System.out.println("\n Student enrolled in the course successfully!");
+                } else {
+                    System.out.println("Error enrolling student to course. check the logs.");
+                    System.out.println("Database said not to do the above operation");
+
+                }
             } else {
                 System.out.println("\n  course not found. Please check the inputs.");
                 counter++;
@@ -1402,7 +1421,7 @@ public class Main {
         while (true) {
             collegeSystem.saveData();
             Teacher teacherToAssign = getTeacherByRollNo(teacherRollNoToAssign);
-            if (teacherRollNoToAssign == null) {
+            if (teacherToAssign == null) {
                 System.out.println("Teacher don't exist");
                 return;
             }
@@ -1411,9 +1430,13 @@ public class Main {
             Course courseToAssign = getCourseByName(courseNameToAssign);
 
             if (courseToAssign != null) {
-                jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign);
-                teacherToAssign.assignToCourse(courseToAssign);
-                System.out.println("\n Teacher assigned to the course successfully!");
+                if (jdbcstuff.TeacherCourse(teacherRollNoToAssign, courseNameToAssign)) {
+                    teacherToAssign.assignToCourse(courseToAssign);
+                    System.out.println("\nTeacher assigned to the course successfully!");
+                } else {
+                    System.out.println("Error assigning teacher to course. Please check the logs.");
+                    System.out.println("Database said not to do the above operation");
+                }
             } else {
                 System.out.println("\n  course not found. Please check the inputs.");
                 counter++;
@@ -1442,6 +1465,7 @@ public class Main {
 
             }
         }
+
     }
 
     private static void TeacherSection() {
@@ -1463,9 +1487,14 @@ public class Main {
             Section sectionToAssign = getSectionByName(sectionNameToAssign);
 
             if (sectionToAssign != null) {
-                jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign);
-                teachertoAssign.assignToSection(sectionToAssign);
-                System.out.println("\n Teacher assigned to the section successfully");
+                if (jdbcstuff.TeacherSection(teacherRollNoToAssignToSection, sectionNameToAssign)) {
+                    teachertoAssign.assignToSection(sectionToAssign);
+                    System.out.println("\n Teacher assigned to the section successfully");
+                } else {
+                    System.out.println("Error assigning teacher to course. Please check the logs.");
+                    System.out.println("Database said not to do the above operation");
+                }
+
             } else {
                 System.out.println("\n Section not found, Please check the inputs are try again later");
                 counter++;
@@ -1559,58 +1588,81 @@ public class Main {
             System.out.println();
         }
     }
-    
-    private static void StudentDeleter(){
+
+    private static void StudentDeleter() {
         StudentDisplayAgain();
         System.out.println();
         System.out.println("Enter the rollNo of the student you want to delete");
         String rollNo = scanner.nextLine();
-         Student studentToDelete = getStudentByRollNo(rollNo);
-            if (studentToDelete == null) {
-                System.out.println("Student don't exist");
-                return;
-            }
-        collegeSystem.StudentDeleter(rollNo);    
-        jdbcstuff.deleteStudent(rollNo);
+        Student studentToDelete = getStudentByRollNo(rollNo);
+        if (studentToDelete == null) {
+            System.out.println("Student don't exist");
+            return;
+        }
+        if (jdbcstuff.deleteStudent(rollNo)) {
+            collegeSystem.StudentDeleter(rollNo);
+            System.out.println("Student deleted successfully");
+            return;
+        } else {
+            System.out.println("Database said to not do it");
+            return;
+        }
     }
-      private static void TeacherDeleter(){
+
+    private static void TeacherDeleter() {
         TeacherDisplayAgain();
         System.out.println();
         System.out.println("Enter the rollNo of the teacher you want to delete");
         String rollNo = scanner.nextLine();
-         Teacher teacherToDelete = getTeacherByRollNo(rollNo);
-            if (teacherToDelete == null) {
-                System.out.println("Teacher don't exist");
-                return;
-            }
-        collegeSystem.TeacherDeleter(rollNo); 
-        jdbcstuff.deleteTeacher(rollNo);   
+        Teacher teacherToDelete = getTeacherByRollNo(rollNo);
+        if (teacherToDelete == null) {
+            System.out.println("Teacher don't exist");
+            return;
+        }
+        if (jdbcstuff.deleteTeacher(rollNo)) {
+            collegeSystem.TeacherDeleter(rollNo);
+            System.out.println("Teacher deleted Succeffully");
+        } else {
+            System.out.println("Database said to not do it");
+            return;
+        }
     }
-      private static void SectionDeleter(){
+
+    private static void SectionDeleter() {
         SectionDisplay();
         System.out.println();
         System.out.println("Enter the Name of the Section you want to delete");
         String Name = scanner.nextLine();
-         Section sectionToDelete = getSectionByName(Name);
-            if (sectionToDelete == null) {
-                System.out.println("Section don't exist");
-                return;
-            }
-        collegeSystem.SectionDeleter(Name);  
-        jdbcstuff.deleteSection(Name);  
+        Section sectionToDelete = getSectionByName(Name);
+        if (sectionToDelete == null) {
+            System.out.println("Section don't exist");
+            return;
+        }
+        if (jdbcstuff.deleteSection(Name)) {
+            collegeSystem.SectionDeleter(Name);
+            System.out.println("Section deleted succeffully");
+        } else {
+            System.out.println("Database said to not do it");
+            return;
+        }
     }
 
-       private static void CourseDeleter(){
+    private static void CourseDeleter() {
         CourseDisplay();
         System.out.println();
         System.out.println("Enter the Name of the Course you want to delete");
         String Name = scanner.nextLine();
-         Course courseToDelete = getCourseByName(Name);
-            if (courseToDelete == null) {
-                System.out.println("Course don't exist");
-                return;
-            }
-        collegeSystem.CourseDeleter(Name);
-        jdbcstuff.deleteCourse(Name);    
+        Course courseToDelete = getCourseByName(Name);
+        if (courseToDelete == null) {
+            System.out.println("Course don't exist");
+            return;
+        }
+        if (jdbcstuff.deleteCourse(Name)) {
+            collegeSystem.CourseDeleter(Name);
+            System.out.println("Course deleter");
+        } else {
+            System.out.println("Database said to not do it");
+            return;
+        }
     }
 }

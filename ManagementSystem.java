@@ -32,7 +32,8 @@ public class ManagementSystem implements Serializable {
 
 
     public void saveData() {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.ser"))) {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.ser"));// see why you have to encapsulate this
             out.writeObject(students);
             out.writeObject(teachers);
             out.writeObject(courses);
@@ -45,7 +46,8 @@ public class ManagementSystem implements Serializable {
     }
 
     public void loadData() {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.ser"))) {
+        try {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.ser"));
             students = (pavan_dynamic_array) in.readObject();
             teachers = (pavan_dynamic_array) in.readObject();
             courses = (pavan_dynamic_array) in.readObject();
@@ -64,15 +66,16 @@ public class ManagementSystem implements Serializable {
             e.printStackTrace();
         }
     }
-    public void saveStateToFile(String filename, Class<?> clazz) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
-            if (clazz.equals(Student.class)) {
+    public void saveStateToFile(String filename, Class<?> classItBelongsTo) { 
+        try{ 
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
+            if (classItBelongsTo.equals(Student.class)) {
                 saveStudents(writer);
-            } else if (clazz.equals(Teacher.class)) {
+            } else if (classItBelongsTo.equals(Teacher.class)) {
                 saveTeachers(writer);
-            } else if (clazz.equals(Course.class)) {
+            } else if (classItBelongsTo.equals(Course.class)) {
                 saveCourses(writer);
-            } else if (clazz.equals(Section.class)) {
+            } else if (classItBelongsTo.equals(Section.class)) {
                 saveSections(writer);
             } else {
                 System.out.println("Class not found");
@@ -82,7 +85,8 @@ public class ManagementSystem implements Serializable {
         }
     }
 
-    private void saveStudents(BufferedWriter writer) throws IOException {
+    private void saveStudents(BufferedWriter writer) {
+        try{
         writer.write("Students:");
         writer.newLine();
         for (int i = 0; i < students.size(); i++) {
@@ -103,9 +107,13 @@ public class ManagementSystem implements Serializable {
             writer.newLine();
             writer.newLine();
         }
+        }catch(IOException e){
+            System.out.println("error saving data");
+        }
     }
 
-    private void saveTeachers(BufferedWriter writer) throws IOException {
+    private void saveTeachers(BufferedWriter writer) {
+        try{
         writer.write("Teachers: ");
         writer.newLine();
 
@@ -131,9 +139,13 @@ public class ManagementSystem implements Serializable {
             writer.newLine();
             writer.newLine();
         }
+    }catch(IOException e){
+        System.out.println("error saving data");
+    }
     }
 
-    private void saveCourses(BufferedWriter writer) throws IOException {
+    private void saveCourses(BufferedWriter writer){
+        try{
         writer.write("Courses: ");
         writer.newLine();
         for (int i = 0; i < courses.size(); i++) {
@@ -156,11 +168,14 @@ public class ManagementSystem implements Serializable {
             }
             writer.newLine();
             writer.newLine();
-
         }
+    }catch(IOException e){
+        System.out.println("error saving code");
+    }
     }
 
-    private void saveSections(BufferedWriter writer) throws IOException {
+    private void saveSections(BufferedWriter writer){
+        try{
         writer.write("Sections:");
         writer.newLine();
         for (int i = 0; i < sections.size(); i++) {
@@ -183,6 +198,9 @@ public class ManagementSystem implements Serializable {
             writer.newLine();
             writer.newLine();
         }
+    }catch(IOException e){
+        System.out.println("error saving data");
+    }
     }
 
     public Student authenticateStudent(String username, String password) {

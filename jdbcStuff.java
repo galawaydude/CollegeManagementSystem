@@ -18,15 +18,15 @@ public class jdbcStuff {
 
     jdbcStuff() {
         int counter = 0;
-        credentials details[] = credentials.values(); 
-        for(credentials i : details){
-            if(counter == 0){
-            url = i.getValue();
+        credentials details[] = credentials.values();
+        for (credentials i : details) {
+            if (counter == 0) {
+                url = i.getValue();
             }
-            if(counter == 1){
+            if (counter == 1) {
                 password = i.getValue();
             }
-            if(counter == 2 ){
+            if (counter == 2) {
                 username = i.getValue();
             }
             counter++;
@@ -39,12 +39,12 @@ public class jdbcStuff {
 
     public String getCreatorUsername() {
         String creatorUsername = " ";
-        String stuffToExecute = "SELECT username FROM public.users WHERE role = 'creator'";
+        String stuffToExecute = "SELECT username FROM users WHERE role = 'creator'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(stuffToExecute);
             rs.next();
-            creatorUsername = rs.getString(1);
+            creatorUsername = rs.getString(1); 
             return creatorUsername;
         } catch (SQLException e) {
             System.out.println("dude there is an error");
@@ -54,7 +54,7 @@ public class jdbcStuff {
 
     public String getCreatorPassword() {
         String creatorPassword = " ";
-        String stuffToExecute = "SELECT password FROM public.users WHERE role = 'creator'";
+        String stuffToExecute = "SELECT password FROM users WHERE role = 'creator'";
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(stuffToExecute);
@@ -78,7 +78,8 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            }
+    }
+
     public void insertStudent(String name, String RollNo, String section, String emailAddress) {
         String stuffToExecute = "INSERT INTO STUDENT (name, rollNo, section, emailaddress) VALUES (?, ?, ?, ?)";
         try {
@@ -91,7 +92,7 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
             writer.write("A new student was added " + "Name: " + name);
             writer.newLine();
         } catch (IOException e) {
@@ -111,7 +112,7 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
             writer.write("A new Teacher was added " + "Name: " + name);
             writer.newLine();
         } catch (IOException e) {
@@ -128,7 +129,7 @@ public class jdbcStuff {
         } catch (SQLException e) {
             System.out.println("dude, there has been an error");
         }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
             writer.write("A new course was added " + "Name: " + name);
             writer.newLine();
         } catch (IOException e) {
@@ -146,7 +147,7 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
             writer.write("A new Section was added " + "Name: " + name);
             writer.newLine();
         } catch (IOException e) {
@@ -154,59 +155,74 @@ public class jdbcStuff {
         }
     }
 
-    public void StudentCourse(String RollNo, String CourseName) {
+    public boolean StudentCourse(String RollNo, String CourseName) {
         String stuffToExecute = "INSERT INTO STUDENT_COURSE (student_rollNo, course_name) VALUES (?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, RollNo);
             pst.setString(2, CourseName);
             pst.executeUpdate();
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Student was assigned a course" + "StudentRollNo: " + RollNo + "Course: " + CourseName);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+    
+            return true; 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Student was assigned a course" + "StudentRollNo: " + RollNo + "Course: " + CourseName);
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false; 
         }
     }
+    
 
-    public void TeacherCourse(String RollNo, String CourseName) {
+    public boolean TeacherCourse(String RollNo, String CourseName) {
         String stuffToExecute = "INSERT INTO TEACHER_COURSE (teacher_rollNo, course_Name) VALUES (?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, RollNo);
             pst.setString(2, CourseName);
             pst.executeUpdate();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Teacher was assigned a course" + "TeacherRollNo: " + RollNo + "Course: " + CourseName);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Teacher was assigned a course" + "TeacherRollNo: " + RollNo + "Course: " + CourseName);
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false;
         }
     }
 
-    public void TeacherSection(String RollNo, String SectionName) {
+    public boolean TeacherSection(String RollNo, String SectionName) {
         String stuffToExecute = "INSERT INTO TEACHER_SECTION (teacher_rollNo, section_name) VALUES (?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, RollNo);
             pst.setString(2, SectionName);
             pst.executeUpdate();
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Teacher was assigned a section" + "TeacherRollNo: " + RollNo + "Section: " + SectionName);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+    
+            return true; 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Teacher was assigned a section" + "TeacherRollNo: " + RollNo + "Section: " + SectionName);
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false;
         }
     }
+    
+
     public void updateTeacherStuff(String TeacherRollNo, String newInfo, String column) {
         String stuffToExecute = "UPDATE teacher SET " + column + " = ? WHERE rollno = ?";
         try {
@@ -218,7 +234,8 @@ public class jdbcStuff {
             e.printStackTrace();
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Teacher information updated" + "TeacherRollNo: " + TeacherRollNo + column + "Changed to " + "NewInfo " + newInfo);
+            writer.write("Teacher information updated" + "TeacherRollNo: " + TeacherRollNo + column + "Changed to "
+                    + "NewInfo " + newInfo);
             writer.newLine();
         } catch (IOException e) {
             System.out.println("Writing info failed");
@@ -235,8 +252,9 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-          try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Student information updated" + "StudentRollNo: " + StudentRollNo + column + "Changed to" + "NewInfo " + newInfo);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.write("Student information updated" + "StudentRollNo: " + StudentRollNo + column + "Changed to"
+                    + "NewInfo " + newInfo);
             writer.newLine();
         } catch (IOException e) {
             System.out.println("Writing info failed");
@@ -253,7 +271,7 @@ public class jdbcStuff {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-          try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
             writer.write("UserCredentials updated" + "Name: " + Name + column + "Changed " + "NewInfo " + newPassword);
             writer.newLine();
         } catch (IOException e) {
@@ -429,78 +447,94 @@ public class jdbcStuff {
         }
     }
 
-    public void deleteStudent(String rollNo) {
+    public boolean deleteStudent(String rollNo) {
         String stuffToExecute = "DELETE FROM Student WHERE rollNo = ?";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, rollNo);
             pst.executeUpdate();
+    
             System.out.println("Student with Roll No " + rollNo + " deleted successfully.");
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Student deleted" + "StudentRollNo: " + rollNo);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+    
+            return true; 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Students updated" + "StudentRollNo: " + rollNo + "Was removed");
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false;
         }
     }
-
-    public void deleteTeacher(String rollNo) {
+    public boolean deleteTeacher(String rollNo) {
         String stuffToExecute = "DELETE FROM Teacher WHERE rollNo = ?";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, rollNo);
             pst.executeUpdate();
+    
             System.out.println("Teacher with Roll No " + rollNo + " deleted successfully.");
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Teacher deleted" + "TeacherRollNo: " + rollNo);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+            return true; 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Teachers updated" + "TeacherRollNo: " + rollNo + "Was removed");
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false; 
         }
     }
+    
 
-    public void deleteSection(String name) {
+    public boolean deleteSection(String name) {
         String stuffToExecute = "DELETE FROM Section WHERE name = ?";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, name);
             pst.executeUpdate();
+    
             System.out.println("Section with Name " + name + " deleted successfully.");
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Section deleted" + "Section: " + name);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+    
+            return true; 
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Sections updated " + "Section: " + name + " Was removed");
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
+            return false;
         }
     }
-
-        public void deleteCourse(String name) {
+    public boolean deleteCourse(String name) {
         String stuffToExecute = "DELETE FROM Course WHERE name = ?";
         try {
             PreparedStatement pst = con.prepareStatement(stuffToExecute);
             pst.setString(1, name);
             pst.executeUpdate();
+    
             System.out.println("Course with Name " + name + " deleted successfully.");
+    
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                writer.write("Course deleted" + "Course: " + name);
+                writer.newLine();
+            } catch (IOException e) {
+                System.out.println("Writing info failed");
+            }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false; 
         }
-          try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-            writer.write("Courses updated " + "Course: " + name + " Was removed");
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Writing info failed");
-        }
-        
     }
-
+    
 
 }

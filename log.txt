@@ -1,0 +1,85 @@
+A new Section was added Name: CSE1
+A new Section was added Name: CSE2
+A new Section was added Name: CSE3
+A new Section was added Name: CSE4
+A new Section was added Name: CSE5
+A new course was added Name: DBMS
+A new course was added Name: JAVA
+A new course was added Name: OOPS
+A new course was added Name: DAA
+A new course was added Name: FDL
+A new course was added Name: AI/ML
+A new course was added Name: DevOps
+A new course was added Name: OpSys
+A new course was added Name: WebDev
+A new course was added Name: DC&CN
+A new course was added Name: CyberSecurity
+A new Teacher was added Name: Harsh Sharma
+A new Teacher was added Name: Kiran Khattar
+A new Teacher was added Name: Manisha Saini
+A new Teacher was added Name: Yogesh Gupta
+A new Teacher was added Name: Atul Mishra
+A new Teacher was added Name: Kiran Sharma
+A new Teacher was added Name: Nishtha Phutela
+A new Teacher was added Name: Nandita Choudary
+A new Teacher was added Name: Nirupuma Maniprasad
+A new Teacher was added Name: Anil Kapoort
+A new Teacher was added Name: Meera Singh
+A new Teacher was added Name: Rohit Verma
+A new Teacher was added Name: Lelouch Lamperouge
+A new Teacher was added Name: Erza Scarlet
+A new Teacher was added Name: Kakashi Hatake
+A new Teacher was added Name: Bulma Briefs
+A new Teacher was added Name: Rem
+A new Teacher was added Name: Hiei
+A new student was added Name: Guneet Chawla
+A new student was added Name: Anjali Mehta
+A new student was added Name: Pavan Kalvakota
+A new student was added Name: Sanskar Gupta
+A new student was added Name: Lakkshya Gupta
+A new student was added Name: Nikhil Kumar Tomar
+A new student was added Name: Vishwajeet Tripati
+A new student was added Name: Manav Sharma
+A new student was added Name: Raghav Malik
+Teacher was assigned a sectionTeacherRollNo: BML2022tch100Section: CSE1
+A new student was added Name: Purav Malik
+A new student was added Name: Siddarth Chugh
+A new student was added Name: Bhargav Srinivas
+A new student was added Name: Shivam Purohit
+A new student was added Name: David Royal
+A new student was added Name: Siddarth Kalla
+A new student was added Name: Ratul Pal
+A new student was added Name: Divas Sharma
+A new student was added Name: Rishit Abhilash
+A new student was added Name: Namrata Dhingra
+A new student was added Name: Harleen Kundi
+A new student was added Name: Shreya Khandelwal
+A new student was added Name: Anirudh Boddu
+Student was assigned a courseStudentRollNo: BML2022Stu100Course: JAVA
+Student was assigned a courseStudentRollNo: BML2022Stu100Course: DevOps
+Student was assigned a courseStudentRollNo: BML2022Stu101Course: JAVA
+Student was assigned a courseStudentRollNo: BML2022Stu101Course: WebDev
+Student was assigned a courseStudentRollNo: BML2022Stu101Course: DAA
+Student was assigned a courseStudentRollNo: BML2022Stu102Course: DBMS
+Student was assigned a courseStudentRollNo: BML2022Stu102Course: FDL
+Student was assigned a courseStudentRollNo: BML2022Stu105Course: DAA
+Student was assigned a courseStudentRollNo: BML2022Stu105Course: AI/ML
+Student was assigned a courseStudentRollNo: BML2022Stu106Course: WebDev
+Student was assigned a courseStudentRollNo: BML2022Stu106Course: OOPS
+Student was assigned a courseStudentRollNo: BML2022Stu106Course: DAA
+Student was assigned a courseStudentRollNo: BML2022Stu107Course: JAVA
+Student was assigned a courseStudentRollNo: BML2022Stu107Course: DevOps
+Student was assigned a courseStudentRollNo: BML2022Stu108Course: DAA
+Student was assigned a courseStudentRollNo: BML2022Stu108Course: AI/ML
+A new student was added Name: Gaurangi
+Student information updatedStudentRollNo: BML2022Stu122nameChanged toNewInfo Gaurangi_
+Student information updatedStudentRollNo: BML2022Stu122dateOfBirthChanged toNewInfo 13 Sept 2005
+UserCredentials updatedName: Gaurangi_passwordChanged NewInfo Gaurangi_1395
+Student was assigned a courseStudentRollNo: BML2022Stu122Course: JAVA
+Teacher was assigned a courseTeacherRollNo: Harsh SharmaCourse: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: DAA
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: DAA
+Teacher was assigned a sectionTeacherRollNo: BML2022tch100Section: CSE1
+Teacher was assigned a courseTeacherRollNo: BML2022tch100Course: DAA
+Teachers updatedTeacherRollNo: BML2022tch100Was removed
+Teacher deletedTeacherRollNo: BML2022tch101
