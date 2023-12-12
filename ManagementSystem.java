@@ -294,6 +294,20 @@ public class ManagementSystem implements Serializable {
         return teachersOfStudent;
     }
 
+    //-----------------------------alternate way
+     public pavan_dynamic_array getTeacherofSec(String section) {
+        pavan_dynamic_array TeacherofSec = new pavan_dynamic_array(1);
+        for (int i = 0; i < sections.size(); i++) {
+            Teacher section = (Section) sections.get(i);
+            if (section.getName().equals(section)) {
+                TeacherofSec.addAll(section.getTeachers());
+            }
+        }
+        return coursesTaughtByTeacher;
+    }
+  //-----------------------------      
+
+
     public pavan_dynamic_array getCoursesTaughtByTeacher(String teacherRollNo) {
         pavan_dynamic_array coursesTaughtByTeacher = new pavan_dynamic_array(1);
         for (int i = 0; i < teachers.size(); i++) {
